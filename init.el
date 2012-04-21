@@ -1,6 +1,12 @@
-(add-to-list 'load-path "~/Dot-Emacs/.emacs.d/")
-(add-to-list 'load-path "~/Dot-Emacs/.emacs.d/color-theme/")
-(add-to-list 'load-path "~/Dot-Emacs/.emacs.d/color-theme-solarized/")
+;; To use: 
+;; 1. Checkout git repo into ~/
+;; 2. In .emacs file, include: 
+;;    (add-to-list 'load-path "~/Dot-Emacs/")
+;;    (load "init")
+
+(add-to-list 'load-path "~/Dot-Emacs/")
+(add-to-list 'load-path "~/Dot-Emacs/color-theme/")
+(add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
 
 (setq-default indent-tabs-mode nil)
 (setq viper-mode t)
@@ -28,3 +34,11 @@
 (setq org-log-done t)
 
 (load "toggle-fullscreen")
+
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
+
