@@ -8,6 +8,8 @@
 (add-to-list 'load-path "~/Dot-Emacs/color-theme/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
 
+(require 'ido)
+
 (setq-default indent-tabs-mode nil)
 (setq viper-mode t)
 (line-number-mode 1)
@@ -15,6 +17,8 @@
 (require 'actionscript-mode)
 
 (global-set-key (kbd "C-s") 'save-buffer)
+(global-set-key (kbd "C-q") 'slime-edit-definition)
+(global-set-key (kbd "C-M-h") 'slime-pop-find-definition-stack)
 
 (global-auto-revert-mode t)
 (add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
