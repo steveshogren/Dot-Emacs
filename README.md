@@ -1,7 +1,9 @@
 # To Use:
-* Checkout to "~/Dot-Emacs/"
-* Add to .emacs file:
+* Checkout repository to "~/Dot-Emacs/"
+
+Add the following to .emacs file:
+
 ```lisp
 (add-to-list 'load-path "~/Dot-Emacs/")
-(load "init"
+(load "init")
 ```
