@@ -8,7 +8,11 @@
 (add-to-list 'load-path "~/Dot-Emacs/color-theme/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
 
+;; enable ido
 (require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 (setq-default indent-tabs-mode nil)
 (setq viper-mode t)
@@ -56,5 +60,4 @@
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
 ;;(require 'swank-clojure-autoload)
 
-
-(linum-mode t)
+(global-linum-mode t)
