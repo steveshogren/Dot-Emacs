@@ -7,6 +7,7 @@
 (add-to-list 'load-path "~/Dot-Emacs/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
+(add-to-list 'load-path "~/Dot-Emacs/evil/")
 
 ;; enable ido
 (require 'ido)
@@ -15,9 +16,13 @@
 (ido-mode 1)
 
 (setq-default indent-tabs-mode nil)
-(setq viper-mode t)
 (line-number-mode 1)
-(require 'vimpulse)
+
+(require 'evil)
+(evil-mode 1)
+;;(setq viper-mode t)
+;;(require 'vimpulse)
+
 (require 'actionscript-mode)
 
 (global-set-key (kbd "C-s") 'save-buffer)
@@ -26,6 +31,7 @@
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
+(global-set-key (kbd "C-c b") 'switch-to-buffer)
 
 (global-auto-revert-mode t)
 (add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
