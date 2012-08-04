@@ -18,10 +18,10 @@
 (setq-default indent-tabs-mode nil)
 (line-number-mode 1)
 
+;; enable evil
 (require 'evil)
 (evil-mode 1)
-;;(setq viper-mode t)
-;;(require 'vimpulse)
+(show-paren-mode t)
 
 (require 'actionscript-mode)
 
@@ -50,7 +50,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-; using gnome for that now
+; using gnome's f11 for that now
 ;(load "toggle-fullscreen")
 
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -64,6 +64,5 @@
 (require 'paredit)
 (defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
-;;(require 'swank-clojure-autoload)
 
 (global-linum-mode t)
