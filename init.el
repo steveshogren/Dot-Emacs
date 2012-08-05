@@ -18,20 +18,9 @@
 (setq-default indent-tabs-mode nil)
 (line-number-mode 1)
 
-;; enable evil
-(require 'evil)
-(evil-mode 1)
-(show-paren-mode t)
 
 (require 'actionscript-mode)
 
-(global-set-key (kbd "C-s") 'save-buffer)
-(global-set-key (kbd "C-q") 'slime-edit-definition)
-(global-set-key (kbd "C-M-h") 'slime-pop-find-definition-stack)
-(global-set-key (kbd "C-x f") 'find-file)
-(global-set-key (kbd "C-S-o") 'next-buffer)
-(global-set-key (kbd "C-S-u") 'previous-buffer)
-(global-set-key (kbd "C-c b") 'switch-to-buffer)
 
 (global-auto-revert-mode t)
 (add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
@@ -62,7 +51,30 @@
 
 (require 'clojure-mode)
 (require 'paredit)
-(defun turn-on-paredit () (paredit-mode 1))
+(defun turn-on-paredit ()
+  (define-key paredit-mode-map "\M-q" 'switch-to-buffer)
+  (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
+  (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
 
+(global-set-key (kbd "C-s") 'save-buffer)
+(global-set-key (kbd "C-q") 'slime-edit-definition)
+(global-set-key (kbd "C-M-h") 'slime-pop-find-definition-stack)
+(global-set-key (kbd "C-x f") 'find-file)
+(global-set-key (kbd "C-S-o") 'next-buffer)
+(global-set-key (kbd "C-S-u") 'previous-buffer)
+(global-set-key (kbd "C-c b") 'switch-to-buffer)
+(global-set-key (kbd "M-q") 'switch-to-buffer)
+(global-set-key (kbd "M-r") 'paredit-reindent-defun)
+(global-set-key (kbd "C-c 1") 'delete-other-windows)
+(global-set-key (kbd "C-c 2") 'split-window)
+(global-set-key (kbd "C-c 3") 'split-window-horizontally)
+
 (global-linum-mode t)
+
+;; enable evil
+(require 'evil)
+(evil-mode 1)
+(show-paren-mode t)
+
+;; C-h k (show keybinding def)
