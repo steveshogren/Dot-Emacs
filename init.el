@@ -14,6 +14,15 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+;; increment number
+(defun increment-number-at-point ()
+      (interactive)
+      (skip-chars-backward "0123456789")
+      (or (looking-at "[0123456789]+")
+          (error "No number at point"))
+      (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
+(global-set-key (kbd "C-a") 'increment-number-at-point)
+
 (setq-default indent-tabs-mode nil)
 (setq viper-mode t)
 (line-number-mode 1)
@@ -35,7 +44,7 @@
 (require 'color-theme-solarized)
 
 ;;(load "cool-blue")
-(color-theme-solarized-dark)
+(color-theme-solarized-light)
 
 (setq visible-bell t)
 (setq default-tab-width 4)
@@ -61,3 +70,7 @@
 ;;(require 'swank-clojure-autoload)
 
 (global-linum-mode t)
+
+(require 'golden-ratio)
+(golden-ratio-enable)
+
