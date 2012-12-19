@@ -7,6 +7,7 @@
 (add-to-list 'load-path "~/Dot-Emacs/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
+(add-to-list 'load-path "~/Dot-Emacs/evil/")
 
 ;; enable ido
 (require 'ido)
@@ -24,9 +25,13 @@
 (global-set-key (kbd "C-a") 'increment-number-at-point)
 
 (setq-default indent-tabs-mode nil)
-(setq viper-mode t)
 (line-number-mode 1)
-(require 'vimpulse)
+
+;; enable evil
+(require 'evil)
+(evil-mode 1)
+(show-paren-mode t)
+
 (require 'actionscript-mode)
 
 (global-set-key (kbd "C-s") 'save-buffer)
@@ -35,6 +40,7 @@
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
+(global-set-key (kbd "C-c b") 'switch-to-buffer)
 
 (global-auto-revert-mode t)
 (add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
@@ -53,7 +59,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-; using gnome for that now
+; using gnome's f11 for that now
 ;(load "toggle-fullscreen")
 
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -67,7 +73,6 @@
 (require 'paredit)
 (defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
-;;(require 'swank-clojure-autoload)
 
 (global-linum-mode t)
 
