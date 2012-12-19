@@ -9,6 +9,14 @@
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
 (add-to-list 'load-path "~/Dot-Emacs/evil/")
 
+(defun ruby-runner ()
+  "Runs runner"
+  (interactive)
+  (shell-command "ruby runner.rb 18"))
+
+(global-set-key (kbd "C-x :") 'ruby-runner); Or whatever key you want...
+
+
 ;; enable ido
 (require 'ido)
 (setq ido-enable-flex-matching t)
