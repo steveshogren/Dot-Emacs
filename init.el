@@ -9,6 +9,15 @@
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
 (add-to-list 'load-path "~/Dot-Emacs/evil/")
 
+
+;;(load-file "~/Dot-Emacs/geiser/elisp/geiser.el")
+
+(require 'rainbow-delimiters)
+(add-hook 'scheme-mode 'rainbow-delimiters-mode)
+;;(add-hook 'scheme-mode 'geiser-smart-tab-mode)
+;;(add-hook 'geiser-mode 'rainbow-delimiters-mode)
+
+
 ;; enable ido
 (require 'ido)
 (setq ido-enable-flex-matching t)
@@ -16,10 +25,13 @@
 (ido-mode 1)
 
 (setq-default indent-tabs-mode nil)
+(setq default-tab-width 2)
+(setq indent-line-function 'insert-tab)
 (line-number-mode 1)
 
 
 (require 'actionscript-mode)
+(require 'quack)
 
 
 (global-auto-revert-mode t)
@@ -33,7 +45,6 @@
 (color-theme-solarized-dark)
 
 (setq visible-bell t)
-(setq default-tab-width 4)
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -56,6 +67,7 @@
   (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
   (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
+(add-hook 'clojure-mode 'rainbow-delimiters-mode)
 
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-q") 'slime-edit-definition)
