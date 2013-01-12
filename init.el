@@ -18,6 +18,16 @@
 (global-set-key (kbd "C-x :") 'ruby-runner); Or whatever key you want...
 
 
+;; Marmalade Package Manager
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
 ;; enable ido
 (require 'ido)
 (setq ido-enable-flex-matching t)
@@ -74,14 +84,14 @@
 (add-hook 'clojure-mode 'rainbow-delimiters-mode)
 
 (global-set-key (kbd "M-q") 'switch-to-buffer)
+(global-set-key (kbd "C-q") 'nrepl-jump)
+(global-set-key (kbd "C-M-h") 'nrepl-jump-back)
 (global-set-key (kbd "M-r") 'paredit-reindent-defun)
 (global-set-key (kbd "C-c 1") 'delete-other-windows)
 (global-set-key (kbd "C-c 2") 'split-window)
 (global-set-key (kbd "C-c 3") 'split-window-horizontally)
 
 (global-set-key (kbd "C-s") 'save-buffer)
-(global-set-key (kbd "C-q") 'slime-edit-definition)
-(global-set-key (kbd "C-M-h") 'slime-pop-find-definition-stack)
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
