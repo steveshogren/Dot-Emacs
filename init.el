@@ -10,6 +10,7 @@
 (add-to-list 'load-path "~/Dot-Emacs/evil/")
 
 (require 'golden-ratio)
+(desktop-save-mode 1)
 
 (defun ruby-runner ()
   "Runs runner"
@@ -51,10 +52,11 @@
 (add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
 
 ;; colors
-(require 'color-theme)
-(require 'color-theme-solarized)
+;;(require 'color-theme)
+;;(require 'color-theme-solarized)
 ;;(load "cool-blue")
-(color-theme-solarized-dark)
+;;(color-theme-solarized-dark)
+(load-theme 'deeper-blue t)
 
 (setq visible-bell t)
 (setq default-tab-width 4)
@@ -77,11 +79,12 @@
 (require 'paredit)
 (require 'rainbow-delimiters)
 (defun turn-on-paredit ()
+  (rainbow-delimiters-mode 1)
   (define-key paredit-mode-map "\M-q" 'switch-to-buffer)
   (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
   (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
-(add-hook 'clojure-mode 'rainbow-delimiters-mode)
+;; (add-hook 'clojure-mode 'rainbow-delimiters-mode)
 
 (global-set-key (kbd "M-q") 'switch-to-buffer)
 (global-set-key (kbd "C-q") 'nrepl-jump)
