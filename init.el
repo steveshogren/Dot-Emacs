@@ -95,6 +95,13 @@
   (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
 
+(require 'anything-match-plugin)
+(require 'anything-config)
+(global-set-key (kbd "C-x b") 'anything-mini)
+(global-set-key (kbd "C-x C-b") 'anything-mini)
+(global-set-key (kbd "C-x C-i") 'anything-imenu)
+(global-set-key (kbd "C-x i") 'anything-imenu)
+
 (global-set-key (kbd "M-q") 'switch-to-buffer)
 (global-set-key (kbd "C-q") 'nrepl-jump)
 (global-set-key (kbd "C-M-h") 'nrepl-jump-back)
@@ -107,7 +114,7 @@
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
-(global-set-key (kbd "C-c b") 'switch-to-buffer)
+(global-set-key (kbd "C-c b") 'anything-mini)
 (global-set-key (kbd "C-c e") 'eval-buffer)
 
 (global-linum-mode 0)
