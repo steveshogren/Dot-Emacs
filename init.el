@@ -28,6 +28,15 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+(when (not (package-installed-p 'nrepl))
+   (package-install 'nrepl))
+(when (not (package-installed-p 'git-gutter))
+   (package-install 'git-gutter))
+(global-git-gutter-mode t)
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-diff)
+(global-set-key (kbd "C-x C-k") 'git-gutter:previous-diff)
+(global-set-key (kbd "C-x C-j") 'git-gutter:next-diff)
+ 
 
 ;; enable ido
 (require 'ido)
@@ -44,8 +53,9 @@
       (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 (global-set-key (kbd "C-a") 'increment-number-at-point)
 
+
 (setq-default indent-tabs-mode nil)
-(line-number-mode 1)
+;;(line-number-mode 1)
 
 
 (global-auto-revert-mode t)
@@ -84,7 +94,6 @@
   (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
   (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
-;; (add-hook 'clojure-mode 'rainbow-delimiters-mode)
 
 (global-set-key (kbd "M-q") 'switch-to-buffer)
 (global-set-key (kbd "C-q") 'nrepl-jump)
@@ -99,8 +108,9 @@
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
 (global-set-key (kbd "C-c b") 'switch-to-buffer)
+(global-set-key (kbd "C-c e") 'eval-buffer)
 
-(global-linum-mode t)
+(global-linum-mode 0)
 
 ;; enable evil
 (require 'evil)
