@@ -8,6 +8,8 @@
 (add-to-list 'load-path "~/Dot-Emacs/color-theme/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
 (add-to-list 'load-path "~/Dot-Emacs/evil/")
+(add-to-list 'load-path "~/Dot-Emacs/tomorrow-theme/")
+(add-to-list 'custom-theme-load-path "~/Dot-Emacs/themes")
 
 (require 'golden-ratio)
 (desktop-save-mode 1)
@@ -23,11 +25,28 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
-(require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+
+(unless (package-installed-p 'fsharp-mode)
+  (package-install 'fsharp-mode))
+(require 'fsharp-mode)
+(setq inferior-fsharp-program "fsharpi --readline-")
+(setq fsharp-compiler "fsharpc")
+(require 'paredit)
+(require 'rainbow-delimiters)
+(defun turn-on-paredit ()
+  (rainbow-delimiters-mode 1)
+  (define-key paredit-mode-map "\M-q" 'switch-to-buffer)
+  (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
+  (paredit-mode 1))
+(turn-on-paredit)
+
+(set-face-attribute 'default nil :font "Liberation Mono-12" :weight 'bold)
+;;(set-face-bold-p 'bold 1)
+(color-theme-tomorrow-night)
+
 (when (not (package-installed-p 'nrepl))
    (package-install 'nrepl))
 (when (not (package-installed-p 'git-gutter))
@@ -55,18 +74,17 @@
 
 
 (setq-default indent-tabs-mode nil)
-;;(line-number-mode 1)
 
 
 (global-auto-revert-mode t)
 (add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
 
 ;; colors
-;;(require 'color-theme)
-;;(require 'color-theme-solarized)
+(require 'color-theme)
+(require 'color-theme-tomorrow)
+(require 'color-theme-solarized)
 ;;(load "cool-blue")
 ;;(color-theme-solarized-dark)
-(load-theme 'deeper-blue t)
 
 (setq visible-bell t)
 (setq default-tab-width 4)
@@ -86,15 +104,6 @@
   version-control t)
 
 (require 'clojure-mode)
-(require 'paredit)
-(require 'rainbow-delimiters)
-(defun turn-on-paredit ()
-  (rainbow-delimiters-mode 1)
-  (define-key paredit-mode-map "\M-q" 'switch-to-buffer)
-  (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
-  (paredit-mode 1))
-(add-hook 'clojure-mode-hook 'turn-on-paredit)
-
 (require 'anything-match-plugin)
 (require 'anything-config)
 (global-set-key (kbd "C-x b") 'anything-mini)
@@ -116,6 +125,7 @@
 (global-set-key (kbd "C-S-u") 'previous-buffer)
 (global-set-key (kbd "C-c b") 'anything-mini)
 (global-set-key (kbd "C-c e") 'eval-buffer)
+(global-set-key (kbd "C-r") 'undo)
 
 (global-linum-mode 0)
 
