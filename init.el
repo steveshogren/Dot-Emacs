@@ -11,8 +11,8 @@
 (add-to-list 'load-path "~/Dot-Emacs/tomorrow-theme/")
 (add-to-list 'custom-theme-load-path "~/Dot-Emacs/themes")
 
+
 (require 'golden-ratio)
-(desktop-save-mode 1)
 
 (defun ruby-runner ()
   "Runs runner"
@@ -29,11 +29,8 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-(unless (package-installed-p 'fsharp-mode)
-  (package-install 'fsharp-mode))
-(require 'fsharp-mode)
-(setq inferior-fsharp-program "fsharpi --readline-")
-(setq fsharp-compiler "fsharpc")
+(load "fsharp.el")
+
 (require 'paredit)
 (require 'rainbow-delimiters)
 (defun turn-on-paredit ()
@@ -43,19 +40,10 @@
   (paredit-mode 1))
 (turn-on-paredit)
 
-(set-face-attribute 'default nil :font "Liberation Mono-12" :weight 'bold)
-;;(set-face-bold-p 'bold 1)
-(color-theme-tomorrow-night)
-
 (when (not (package-installed-p 'nrepl))
    (package-install 'nrepl))
-(when (not (package-installed-p 'git-gutter))
-   (package-install 'git-gutter))
-(global-git-gutter-mode t)
-(global-set-key (kbd "C-x v =") 'git-gutter:popup-diff)
-(global-set-key (kbd "C-x C-k") 'git-gutter:previous-diff)
-(global-set-key (kbd "C-x C-j") 'git-gutter:next-diff)
  
+(load "git-gutter.el")
 
 ;; enable ido
 (require 'ido)
@@ -63,69 +51,15 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-;; increment number
-(defun increment-number-at-point ()
-      (interactive)
-      (skip-chars-backward "0123456789")
-      (or (looking-at "[0123456789]+")
-          (error "No number at point"))
-      (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
-(global-set-key (kbd "C-a") 'increment-number-at-point)
-
-
-(setq-default indent-tabs-mode nil)
-
-
-(global-auto-revert-mode t)
-(add-to-list 'auto-mode-alist '("\\.as\\'" . actionscript-mode))
-
-;; colors
-(require 'color-theme)
-(require 'color-theme-tomorrow)
-(require 'color-theme-solarized)
-;;(load "cool-blue")
-;;(color-theme-solarized-dark)
-
-(setq visible-bell t)
-(setq default-tab-width 4)
-(add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
-
-; using gnome's f11 for that now
-;(load "toggle-fullscreen")
-
-(setq backup-directory-alist `(("." . "~/.saves")))
-(setq backup-by-copying t)
-(setq delete-old-versions t
-  kept-new-versions 6
-  kept-old-versions 2
-  version-control t)
+(load "increment-number.el")
+(load "my-colors.el")
+(load "desktopsaves.el")
 
 (require 'clojure-mode)
 (require 'anything-match-plugin)
 (require 'anything-config)
-(global-set-key (kbd "C-x b") 'anything-mini)
-(global-set-key (kbd "C-x C-b") 'anything-mini)
-(global-set-key (kbd "C-x C-i") 'anything-imenu)
-(global-set-key (kbd "C-x i") 'anything-imenu)
 
-(global-set-key (kbd "M-q") 'switch-to-buffer)
-(global-set-key (kbd "C-q") 'nrepl-jump)
-(global-set-key (kbd "C-M-h") 'nrepl-jump-back)
-(global-set-key (kbd "M-r") 'paredit-reindent-defun)
-(global-set-key (kbd "C-c 1") 'delete-other-windows)
-(global-set-key (kbd "C-c 2") 'split-window)
-(global-set-key (kbd "C-c 3") 'split-window-horizontally)
-
-(global-set-key (kbd "C-s") 'save-buffer)
-(global-set-key (kbd "C-x f") 'find-file)
-(global-set-key (kbd "C-S-o") 'next-buffer)
-(global-set-key (kbd "C-S-u") 'previous-buffer)
-(global-set-key (kbd "C-c b") 'anything-mini)
-(global-set-key (kbd "C-c e") 'eval-buffer)
-(global-set-key (kbd "C-r") 'undo)
+(load "shortcuts.el")
 
 (global-linum-mode 0)
 
