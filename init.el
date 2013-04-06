@@ -11,15 +11,11 @@
 (add-to-list 'load-path "~/Dot-Emacs/tomorrow-theme/")
 (add-to-list 'custom-theme-load-path "~/Dot-Emacs/themes")
 
-
-(require 'golden-ratio)
-
 (defun ruby-runner ()
   "Runs runner"
   (interactive)
   (shell-command "ruby runner.rb 67"))
 (global-set-key (kbd "C-x :") 'ruby-runner); Or whatever key you want...
-
 
 ;; Marmalade Package Manager
 (require 'package)
@@ -30,27 +26,12 @@
 (package-initialize)
 
 (load "fsharp.el")
-
-(require 'paredit)
-(require 'rainbow-delimiters)
-(defun turn-on-paredit ()
-  (rainbow-delimiters-mode 1)
-  (define-key paredit-mode-map "\M-q" 'switch-to-buffer)
-  (define-key paredit-mode-map "\M-r" 'paredit-reindent-defun)
-  (paredit-mode 1))
-(turn-on-paredit)
+(load "enable-paredit.el")
 
 (when (not (package-installed-p 'nrepl))
    (package-install 'nrepl))
  
 (load "git-gutter.el")
-
-;; enable ido
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
