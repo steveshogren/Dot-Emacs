@@ -36,7 +36,8 @@
 (load "my-colors.el")
 (load "desktopsaves.el")
 
-(require 'clojure-mode)
+(load "clojure-settings.el")
+
 (require 'anything-match-plugin)
 (require 'anything-config)
 
