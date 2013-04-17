@@ -31,6 +31,10 @@
 (global-set-key (kbd "C-c b") 'anything-mini)
 (global-set-key (kbd "C-c e") 'eval-buffer)
 (global-set-key (kbd "C-r") 'undo)
+(global-set-key (kbd "C-c r") 'slime-eval-last-expression) 
+(global-set-key (kbd "C-c C-r") 'slime-eval-last-expression) 
+(global-set-key (kbd "C-x C-r") 'slime-eval-last-expression) 
+(global-set-key (kbd "C-x r") 'slime-eval-last-expression) 
 
 
 (defun doc-keys ()
