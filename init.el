@@ -10,6 +10,9 @@
 (add-to-list 'load-path "~/Dot-Emacs/evil/")
 (add-to-list 'load-path "~/Dot-Emacs/tomorrow-theme/")
 (add-to-list 'custom-theme-load-path "~/Dot-Emacs/themes")
+(add-to-list 'load-path "~/Dot-Emacs/geiser/elisp/")
+(require 'geiser)
+;;(load-file "~/Dot-Emacs/geiser/elisp/geiser.el")
 
 (defun ruby-runner ()
   "Runs runner"
@@ -24,6 +27,10 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+
+
+(require 'rainbow-delimiters)
+(add-hook 'scheme-mode 'rainbow-delimiters-mode)
 
 (load "fsharp.el")
 (load "enable-paredit.el")
