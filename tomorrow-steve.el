@@ -1,0 +1,36 @@
+
+(defun color-theme-tomorrow-steve ()
+  ""
+(interactive)
+  (color-theme-install
+   '(color-theme-tomorrow-steve
+     ((foreground-color . "#FFFFFF")
+      (background-color . "#14212e") 
+      (background-mode . dark))
+     (bold ((t (:bold t))))
+     (bold-italic ((t (:italic t :bold t))))
+     (default ((t (:background "#14212e" :foreground "#ffffff"))))
+     (cursor ((t (:background "#ffff00" :foreground "#ffffff"))))
+     (region ((t (:background "#004b61"))))
+     (mode-line ((t (:background "#000000" :foreground "#0498da"))))
+     (mode-line-inactive ((t (:background "#000000" :foreground "#0498da"))))
+     (fringe ((t (:background "#000000"))))
+     (minibuffer-prompt ((t (:foreground "#ffcc33"))))
+     (font-lock-builtin-face ((t (:foreground "#ffff00"))))
+     (font-lock-comment-face ((t (:foreground "#7eb0c9"))))
+     (font-lock-constant-face ((t (:foreground "#009bff"))))
+     (font-lock-function-name-face ((t (:foreground "#ffffff"))))
+     (font-lock-keyword-face ((t (:foreground "#009bff"))))
+     (font-lock-string-face ((t (:foreground "#c2b56e"))))
+     (font-lock-type-face ((t (:foreground "#ffcc33"))))
+     (font-lock-variable-name-face ((t (:foreground "#00b9ff"))))
+     (font-lock-warning-face ((t (:foreground "#ff0000" :weight bold))))
+     (isearch ((t (:background "#ffcc33" :foreground "#000000"))))
+     (hl-line ((t (:background "#112233"))))
+     (mode-line ((t (:foreground "#ffffff" :background "#333333"))))
+     (region ((t (:foreground nil :background "#555555"))))
+     (show-paren-match-face ((t (:bold t :foreground "#ffffff" 
+                                       :background "#050505")))))))
+(set-cursor-color "#ffcc33")
+
+(color-theme-tomorrow-steve)

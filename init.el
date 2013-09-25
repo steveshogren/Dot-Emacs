@@ -14,6 +14,7 @@
 (require 'geiser)
 ;;(load-file "~/Dot-Emacs/geiser/elisp/geiser.el")
 
+
 (defun ruby-runner ()
   "Runs runner"
   (interactive)
@@ -48,6 +49,7 @@
 (require 'anything-match-plugin)
 (require 'anything-config)
 
+(winner-mode 1)
 (load "shortcuts.el")
 
 (global-linum-mode 0)

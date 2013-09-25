@@ -31,11 +31,19 @@
 (global-set-key (kbd "C-c b") 'anything-mini)
 (global-set-key (kbd "C-c e") 'eval-buffer)
 (global-set-key (kbd "C-r") 'undo)
+
+(global-set-key (kbd "C-x C-u") 'winner-undo)
+(global-set-key (kbd "C-x C-o") 'winner-redo)
+
+
 (global-set-key (kbd "C-c r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-c C-r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-x C-r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-x r") 'slime-eval-last-expression) 
+(global-set-key (kbd "C-x t") 'fill-paragraph) 
+(global-set-key (kbd "C-x C-t") 'fill-paragraph) 
 
+;;(define-key slime-mode-map "C-x C-r" 'slime-eval-last-expression)
 
 (defun doc-keys ()
   (define-key doc-view-mode-map "j" 'doc-view-scroll-up-or-next-page)
