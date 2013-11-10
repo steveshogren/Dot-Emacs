@@ -59,4 +59,19 @@
 (evil-mode 1)
 (show-paren-mode t)
 
+(defun make-conditional-key-translation (key-from key-to translate-keys-p)
+  (define-key key-translation-map key-from
+    (lambda (prompt)
+      (if (funcall translate-keys-p key-from) key-to key-from))))
+
+(defun my-translate-keys-p (key-from)
+   (or (evil-motion-state-p) (evil-normal-state-p) (evil-visual-state-p)))
+
+;; (make-conditional-key-translation (kbd "g") (kbd "C-x") 'my-translate-keys-p)
+
+(define-key evil-normal-state-map "e" nil)
+(define-key evil-normal-state-map "eu" 'universal-argument)
+(define-key key-translation-map (kbd "ee") (kbd "C-x C-e"))
+
 ;; C-h k (show keybinding def)
+
