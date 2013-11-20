@@ -5,14 +5,18 @@
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
-(define-key global-map "\M-u" 'previous-buffer)
+
 (define-key global-map "\M-o" 'next-buffer)
 
 
-(global-set-key (kbd "C-x b") 'anything-mini)
-(global-set-key (kbd "C-x C-b") 'anything-mini)
-(global-set-key (kbd "C-x C-i") 'anything-imenu)
-(global-set-key (kbd "C-x i") 'anything-imenu)
+;; (global-set-key (kbd "C-x b") 'anything-mini)
+;;(global-set-key (kbd "C-x C-b") 'anything-mini)
+;;(global-set-key (kbd "C-x C-i") 'anything-imenu)
+;;(global-set-key (kbd "C-x i") 'anything-imenu)
+(global-set-key (kbd "C-u") 'universal-argument)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;;(global-set-key (kbd "M-x") 'helm-command-prefix-key)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 (global-set-key (kbd "M-q") 'switch-to-buffer)
 (global-set-key (kbd "C-q") 'nrepl-jump)
@@ -26,8 +30,6 @@
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
-(global-set-key (kbd "C-o") 'next-buffer)
-(global-set-key (kbd "C-u") 'previous-buffer)
 (global-set-key (kbd "C-c b") 'anything-mini)
 (global-set-key (kbd "C-c e") 'eval-buffer)
 (global-set-key (kbd "C-r") 'undo)

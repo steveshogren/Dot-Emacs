@@ -27,6 +27,8 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
 
@@ -38,7 +40,11 @@
 
 (when (not (package-installed-p 'nrepl))
    (package-install 'nrepl))
- 
+(when (not (package-installed-p 'helm))
+   (package-install 'helm))
+
+(require 'helm-config)
+
 (load "git-gutter.el")
 (load "increment-number.el")
 (load "my-colors.el")
@@ -59,19 +65,6 @@
 (evil-mode 1)
 (show-paren-mode t)
 
-(defun make-conditional-key-translation (key-from key-to translate-keys-p)
-  (define-key key-translation-map key-from
-    (lambda (prompt)
-      (if (funcall translate-keys-p key-from) key-to key-from))))
-
-(defun my-translate-keys-p (key-from)
-   (or (evil-motion-state-p) (evil-normal-state-p) (evil-visual-state-p)))
-
-;; (make-conditional-key-translation (kbd "g") (kbd "C-x") 'my-translate-keys-p)
-
-(define-key evil-normal-state-map "e" nil)
-(define-key evil-normal-state-map "eu" 'universal-argument)
-(define-key key-translation-map (kbd "ee") (kbd "C-x C-e"))
-
 ;; C-h k (show keybinding def)
+;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
 
