@@ -1,8 +1,4 @@
-;; To use: 
-;; 1. Checkout git repo into ~/
-;; 2. In .emacs file, include: 
-;;    (add-to-list 'load-path "~/Dot-Emacs/")
-;;    (load "init")
+;; To use: checkout git repo into ~/.emacs.d/
 
 (add-to-list 'load-path "~/Dot-Emacs/")
 (add-to-list 'load-path "~/Dot-Emacs/color-theme/")
