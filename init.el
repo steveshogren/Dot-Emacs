@@ -1,15 +1,19 @@
 ;; To use: checkout git repo into ~/.emacs.d/
 
-(add-to-list 'load-path "~/Dot-Emacs/")
-(add-to-list 'load-path "~/Dot-Emacs/color-theme/")
-(add-to-list 'load-path "~/Dot-Emacs/color-theme-solarized/")
-(add-to-list 'load-path "~/Dot-Emacs/evil/")
-(add-to-list 'load-path "~/Dot-Emacs/tomorrow-theme/")
-(add-to-list 'custom-theme-load-path "~/Dot-Emacs/themes")
-(add-to-list 'load-path "~/Dot-Emacs/geiser/elisp/")
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/color-theme/")
+(add-to-list 'load-path "~/.emacs.d/color-theme-solarized/")
+(add-to-list 'load-path "~/.emacs.d/evil/")
+(add-to-list 'load-path "~/.emacs.d/tomorrow-theme/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/geiser/elisp/")
 (require 'geiser)
-;;(load-file "~/Dot-Emacs/geiser/elisp/geiser.el")
+;;(load-file "~/.emacs.d/geiser/elisp/geiser.el")
 
+
+(require 'helm-git-grep)
+(global-set-key (kbd "C-c g") 'helm-git-grep)
+(global-set-key (kbd "C-*") 'helm-git-grep-at-point)
 
 (defun ruby-runner ()
   "Runs runner"
