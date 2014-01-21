@@ -1,0 +1,13 @@
+ruby tests.rb 
+ruby tests.rb 
+lein run
+lein run
+lein run
+lein run
+lein run
+cd ..
+cd ..
+cd ../
+cd real-world-haskell/
+hcmi
+ghci

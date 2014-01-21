@@ -11,9 +11,6 @@
 ;;(load-file "~/.emacs.d/geiser/elisp/geiser.el")
 
 
-(require 'helm-git-grep)
-(global-set-key (kbd "C-c g") 'helm-git-grep)
-(global-set-key (kbd "C-*") 'helm-git-grep-at-point)
 
 (defun ruby-runner ()
   "Runs runner"
@@ -42,8 +39,15 @@
    (package-install 'nrepl))
 (when (not (package-installed-p 'helm))
    (package-install 'helm))
+(when (not (package-installed-p 'haskell-mode))
+   (package-install 'haskell-mode))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook (lambda () (setq evil-auto-indent nil)))
 
 (require 'helm-config)
+(require 'helm-git-grep)
+(global-set-key (kbd "C-c g") 'helm-git-grep)
+(global-set-key (kbd "C-*") 'helm-git-grep-at-point)
 
 (load "git-gutter.el")
 (load "increment-number.el")
