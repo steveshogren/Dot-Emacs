@@ -48,6 +48,10 @@
 (require 'helm-git-grep)
 (global-set-key (kbd "C-c g") 'helm-git-grep)
 (global-set-key (kbd "C-*") 'helm-git-grep-at-point)
+;; (toggle-frame-fullscreen)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
 
 (load "git-gutter.el")
 (load "increment-number.el")

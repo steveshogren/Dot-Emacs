@@ -28,7 +28,7 @@
 ;;(load "cool-blue")
 ;;(color-theme-cool-blue)
 ;;(color-theme-solarized-dark)
-(color-theme-tomorrow-night)
+(color-theme-tomorrow-night-bright)
 (setq visible-bell t)
 (setq default-tab-width 4)
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
