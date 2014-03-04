@@ -76,3 +76,20 @@
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
 
+;; Look into:
+;;  Abbrev
+;;  Auto fill mode
+;;  Bookmarks
+;;  Byte Compliation
+;;  Completion
+;;  Dired
+;;  Dribble file
+;;  Electric
+;;  Highlighting
+;;  Hooks
+;;  Recursive Editing 
+;;  Speedbar
+;;  Spelling
+;;  Syntax Tables
+;;  Tags
+
