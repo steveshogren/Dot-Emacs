@@ -93,3 +93,8 @@
 ;;  Syntax Tables
 ;;  Tags
 
+;; -- Info-major-mode --
+;; info-up ^
+;; info-next n
+;; info-prev p
+;; info-search s
