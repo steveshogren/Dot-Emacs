@@ -19,8 +19,8 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 (global-set-key (kbd "M-q") 'switch-to-buffer)
-(global-set-key (kbd "C-q") 'nrepl-jump)
-(global-set-key (kbd "C-M-h") 'nrepl-jump-back)
+(global-set-key (kbd "C-q") 'cider-jump)
+(global-set-key (kbd "C-M-h") 'cider-jump-back)
 (global-set-key (kbd "M-r") 'paredit-reindent-defun)
 (global-set-key (kbd "C-c 1") 'delete-other-windows)
 (global-set-key (kbd "C-c 2") 'split-window)

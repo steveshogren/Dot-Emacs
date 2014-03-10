@@ -35,8 +35,15 @@
 (load "fsharp.el")
 (load "enable-paredit.el")
 
-(when (not (package-installed-p 'nrepl))
-   (package-install 'nrepl))
+(unless (package-installed-p 'cider)
+  (package-install 'cider))
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq cider-repl-pop-to-buffer-on-connect nil)
+;; (set cider-repl-result-prefix ";; => ")
+(setq cider-repl-use-clojure-font-lock t)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+
 (when (not (package-installed-p 'helm))
    (package-install 'helm))
 (when (not (package-installed-p 'haskell-mode))
@@ -98,3 +105,7 @@
 ;; info-next n
 ;; info-prev p
 ;; info-search s
+
+;; In Clojure (dir ns ) lists the functions in the ns
+
+
