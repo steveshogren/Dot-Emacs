@@ -21,7 +21,10 @@
 (rainbow-delimiters-mode 1)
 
 (setq-default indent-tabs-mode nil)
-(set-face-attribute 'default nil :font "Liberation Mono-11" :weight 'bold)
+(if (functionp 'set-face-attribute) 
+    (set-face-attribute 'default nil
+                        :font "Inconsolata-11"
+                        ))
 (require 'color-theme)
 (require 'color-theme-tomorrow)
 (require 'color-theme-solarized)

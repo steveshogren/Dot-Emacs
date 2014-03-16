@@ -12,12 +12,14 @@
 
 
 
-(defun ruby-runner ()
+(defun gsl-runner ()
   "Runs runner"
   (interactive)
-  (shell-command "ruby runner.rb 67"))
-(global-set-key (kbd "C-x :") 'ruby-runner); Or whatever key you want...
+  (shell-command (concat "gsl " (buffer-file-name))))
+(global-set-key (kbd "C-x :") 'gsl-runner); Or whatever key you want...
 
+
+(global-set-key (kbd "C-x :") 'ruby-runner); Or whatever key you want...
 ;; Marmalade Package Manager
 (require 'package)
 (add-to-list 'package-archives
@@ -30,7 +32,7 @@
 
 
 (require 'rainbow-delimiters)
-(add-hook 'scheme-mode 'rainbow-delimiters-mode)
+(global-rainbow-delimiters-mode)
 
 (load "fsharp.el")
 (load "enable-paredit.el")
