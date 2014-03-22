@@ -89,6 +89,9 @@
      (set-face-foreground 'magit-diff-del "red3")
      (when (not window-system)
        (set-face-background 'magit-item-highlight "black"))))
+(defun disable-magit-highlight-in-buffer () 
+  (face-remap-add-relative 'magit-item-highlight '()))
+(add-hook 'magit-status-mode-hook 'disable-magit-highlight-in-buffer)
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
