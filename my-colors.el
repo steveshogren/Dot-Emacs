@@ -28,10 +28,20 @@
 (require 'color-theme)
 (require 'color-theme-tomorrow)
 (require 'color-theme-solarized)
+
+;; color-theme-comida
+;; color-theme-hober
+;; color-theme-peirson
+;; color-theme-pok-wob
+;; color-theme-id-dark
+
 ;;(load "cool-blue")
 ;;(color-theme-cool-blue)
 ;;(color-theme-solarized-dark)
 (color-theme-tomorrow-night-bright)
+
+;; (color-theme-comidia)
+;; (color-theme-pok-wob)
 (setq visible-bell t)
 (setq default-tab-width 4)
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))

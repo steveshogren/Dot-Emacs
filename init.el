@@ -11,7 +11,6 @@
 ;;(load-file "~/.emacs.d/geiser/elisp/geiser.el")
 
 
-
 (defun gsl-runner ()
   "Runs runner"
   (interactive)
@@ -62,7 +61,6 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 
-(load "git-gutter.el")
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
@@ -121,4 +119,6 @@
 
 ;; In Clojure (dir ns ) lists the functions in the ns
 
-
+;; HTML-mode
+;; close html tag -  C-c / 
+;; delete html tags -  C-c C-d 
