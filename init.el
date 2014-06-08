@@ -80,6 +80,18 @@
 (evil-mode 1)
 (show-paren-mode t)
 
+
+;; insert mode window move
+(define-key evil-motion-state-map (kbd "C-w") nil)
+(define-key evil-insert-state-map (kbd "C-w") nil)
+(define-prefix-command 'window-move-map)
+(define-key evil-insert-state-map (kbd "C-w") window-move-map)
+(define-key evil-insert-state-map (kbd "C-w l") 'evil-window-right)
+(define-key evil-insert-state-map (kbd "C-w h") 'evil-window-left)
+(define-key evil-motion-state-map (kbd "C-w") window-move-map)
+(define-key evil-motion-state-map (kbd "C-w l") 'evil-window-right)
+(define-key evil-motion-state-map (kbd "C-w h") 'evil-window-left)
+
 ;; change magit diff colors
 (eval-after-load 'magit
   '(progn
@@ -90,6 +102,8 @@
 (defun disable-magit-highlight-in-buffer () 
   (face-remap-add-relative 'magit-item-highlight '()))
 (add-hook 'magit-status-mode-hook 'disable-magit-highlight-in-buffer)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)

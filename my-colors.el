@@ -29,19 +29,21 @@
 (require 'color-theme-tomorrow)
 (require 'color-theme-solarized)
 
-;; color-theme-comida
-;; color-theme-hober
-;; color-theme-peirson
+;; color-theme-comida 
+;; color-theme-hober  // dark red/white
+;; color-theme-pierson // very light white blue
 ;; color-theme-pok-wob
 ;; color-theme-id-dark
+;; color-theme-xemacs // light white blue
+;; color-theme-jsc-light2 // light high contrast
 
 ;;(load "cool-blue")
 ;;(color-theme-cool-blue)
 ;;(color-theme-solarized-dark)
 (color-theme-tomorrow-night-bright)
 
-;; (color-theme-comidia)
-;; (color-theme-pok-wob)
+;; (color-theme-comidia) ;; dark orange/blue
+;; (color-theme-pok-wob) ;; dark yellow/white
 (setq visible-bell t)
 (setq default-tab-width 4)
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
