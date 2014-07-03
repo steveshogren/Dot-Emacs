@@ -14,7 +14,7 @@
 (defun gsl-runner ()
   (interactive)
   (shell-command (concat "gsl " (buffer-file-name))))
-(global-set-key (kbd "C-x :") 'gsl-runner)
+;; (global-set-key (kbd "C-x :") 'gsl-runner)
 
 ;; Marmalade Package Manager
 (require 'package)
