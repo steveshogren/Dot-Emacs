@@ -12,16 +12,15 @@
 
 
 (defun gsl-runner ()
-  "Runs runner"
   (interactive)
   (shell-command (concat "gsl " (buffer-file-name))))
-(global-set-key (kbd "C-x :") 'gsl-runner); Or whatever key you want...
+(global-set-key (kbd "C-x :") 'gsl-runner)
 
 (defun haskell-repl-c ()
   (interactive) ;; tells emacs that the function is a command
   (evil-window-right 1)
   (insert ":r") 
-  (newline) 
+  (comint-send-input) 
   (evil-window-left 1))
 (global-set-key (kbd "C-x :") 'haskell-repl-c)
 
