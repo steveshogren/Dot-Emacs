@@ -16,16 +16,6 @@
   (shell-command (concat "gsl " (buffer-file-name))))
 (global-set-key (kbd "C-x :") 'gsl-runner)
 
-(defun haskell-repl-c ()
-  (interactive) ;; tells emacs that the function is a command
-  (evil-window-right 1)
-  (insert ":r") 
-  (comint-send-input) 
-  (evil-window-left 1))
-(global-set-key (kbd "C-x :") 'haskell-repl-c)
-(global-set-key (kbd "<f4>") 'haskell-repl-c)
-
-
 ;; Marmalade Package Manager
 (require 'package)
 (add-to-list 'package-archives
