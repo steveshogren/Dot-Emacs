@@ -76,6 +76,7 @@
 (defun haskell-modes-hook ()
   (define-key haskell-mode-map (kbd "C-x :") 'haskell-repl-c)
   (define-key haskell-mode-map (kbd "<f4>") 'haskell-repl-c)
+  (define-key haskell-mode-map (kbd "<f5>") 'haskell-repl-c)
   )
 (add-hook 'haskell-mode-hook 'haskell-modes-hook)
 
