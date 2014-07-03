@@ -17,8 +17,15 @@
   (shell-command (concat "gsl " (buffer-file-name))))
 (global-set-key (kbd "C-x :") 'gsl-runner); Or whatever key you want...
 
+(defun haskell-repl-c ()
+  (interactive) ;; tells emacs that the function is a command
+  (evil-window-right 1)
+  (insert ":r") 
+  (newline) 
+  (evil-window-left 1))
+(global-set-key (kbd "C-x :") 'haskell-repl-c)
 
-(global-set-key (kbd "C-x :") 'ruby-runner); Or whatever key you want...
+
 ;; Marmalade Package Manager
 (require 'package)
 (add-to-list 'package-archives

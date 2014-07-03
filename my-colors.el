@@ -36,6 +36,7 @@
 ;; color-theme-id-dark
 ;; color-theme-xemacs // light white blue
 ;; color-theme-jsc-light2 // light high contrast
+;; color-theme-tomorrow // light higher contrast
 
 ;;(load "cool-blue")
 ;;(color-theme-cool-blue)
