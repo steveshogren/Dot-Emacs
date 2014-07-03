@@ -23,6 +23,7 @@
   (comint-send-input) 
   (evil-window-left 1))
 (global-set-key (kbd "C-x :") 'haskell-repl-c)
+(global-set-key (kbd "<f4>") 'haskell-repl-c)
 
 
 ;; Marmalade Package Manager
