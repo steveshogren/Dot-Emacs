@@ -67,12 +67,13 @@
 (add-hook 'doc-view-mode-hook 'doc-keys)
 
 (defun haskell-repl-c ()
-  (save-buffer)
   (interactive) ;; tells emacs that the function is a command
-  (evil-window-right 1)
-  (insert ":r") 
-  (comint-send-input) 
-  (evil-window-left 1))
+  (save-buffer)
+  (when (get-buffer "*haskell*")
+    (switch-to-buffer-other-window (get-buffer "*haskell*"))
+    (insert ":r") 
+    (comint-send-input) 
+    (switch-to-buffer-other-window (other-buffer (current-buffer) 1))))
 (defun haskell-modes-hook ()
   (define-key haskell-mode-map (kbd "C-x :") 'haskell-repl-c)
   (define-key haskell-mode-map (kbd "<f4>") 'haskell-repl-c)
