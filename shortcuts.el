@@ -66,14 +66,27 @@
 
 (add-hook 'doc-view-mode-hook 'doc-keys)
 
+(defun string/ends-with (string suffix)
+      "Return t if STRING ends with SUFFIX."
+      (and (string-match (rx-to-string `(: ,suffix eos) t)
+                         string)
+           t))
+
 (defun haskell-repl-c ()
   (interactive) ;; tells emacs that the function is a command
   (save-buffer)
   (when (get-buffer "*haskell*")
-    (switch-to-buffer-other-window (get-buffer "*haskell*"))
-    (insert ":r") 
-    (comint-send-input) 
-    (switch-to-buffer-other-window (other-buffer (current-buffer) 1))))
+    (buffer-name)
+    (let ((filepath (buffer-file-name)))
+      (switch-to-buffer-other-window (get-buffer "*haskell*"))
+      (when (string/ends-with filepath ".hs")
+        (insert (concat ":cd  " (file-name-directory filepath)))
+        (comint-send-input)
+        (insert (concat ":load " (file-name-nondirectory filepath)))
+        (comint-send-input))
+      (insert ":r") 
+      (comint-send-input)
+      (switch-to-buffer-other-window (other-buffer (current-buffer) 1)))))
 (defun haskell-modes-hook ()
   (define-key haskell-mode-map (kbd "C-x :") 'haskell-repl-c)
   (define-key haskell-mode-map (kbd "<f4>") 'haskell-repl-c)
