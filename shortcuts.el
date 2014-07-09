@@ -45,6 +45,12 @@
 (global-set-key (kbd "C-x t") 'fill-paragraph) 
 (global-set-key (kbd "C-x C-t") 'fill-paragraph) 
 
+
+(global-set-key (kbd "<f3>") 'comment-or-uncomment-region)
+;; (global-set-key (kbd "C-k") 'save-buffer)
+;; (define-prefix-command 'ctrlk-prefix-map)
+;; (global-set-key (kbd "C-k") 'ctrlk-prefix-map)
+
 ;;(define-key slime-mode-map "C-x C-r" 'slime-eval-last-expression)
 
 (defun sas-shell-modes-hook ()
