@@ -105,6 +105,8 @@
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
 
+;; search - rgrep
+
 ;; Look into:
 ;;  Abbrev
 ;;  Auto fill mode
