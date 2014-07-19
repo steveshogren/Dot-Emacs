@@ -78,9 +78,15 @@
                          string)
            t))
 
+(defun ensure-haskell-repl-running ()
+  (when (not (get-buffer "*haskell*"))
+    (run-haskell)
+    (switch-to-buffer-other-window (other-buffer (current-buffer) 1))))
+
 (defun haskell-repl-c ()
   (interactive) ;; tells emacs that the function is a command
   (save-buffer)
+  (ensure-haskell-repl-running)
   (when (get-buffer "*haskell*")
     (buffer-name)
     (let ((filepath (buffer-file-name)))
@@ -93,6 +99,7 @@
       (insert ":r") 
       (comint-send-input)
       (switch-to-buffer-other-window (other-buffer (current-buffer) 1)))))
+
 (defun haskell-modes-hook ()
   (define-key haskell-mode-map (kbd "C-x :") 'haskell-repl-c)
   (define-key haskell-mode-map (kbd "<f4>") 'haskell-repl-c)
