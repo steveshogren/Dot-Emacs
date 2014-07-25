@@ -88,6 +88,8 @@
 (define-key evil-motion-state-map (kbd "C-w") window-move-map)
 (define-key evil-motion-state-map (kbd "C-w l") 'evil-window-right)
 (define-key evil-motion-state-map (kbd "C-w h") 'evil-window-left)
+(define-key evil-motion-state-map (kbd "C-w j") 'evil-window-down)
+(define-key evil-motion-state-map (kbd "C-w k") 'evil-window-up)
 
 ;; change magit diff colors
 (eval-after-load 'magit

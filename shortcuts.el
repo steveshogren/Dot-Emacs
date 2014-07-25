@@ -21,6 +21,7 @@
 (global-set-key (kbd "M-q") 'switch-to-buffer)
 (global-set-key (kbd "C-q") 'cider-jump)
 (global-set-key (kbd "C-M-h") 'cider-jump-back)
+(global-set-key (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
 (global-set-key (kbd "M-r") 'paredit-reindent-defun)
 (global-set-key (kbd "C-c 1") 'delete-other-windows)
 (global-set-key (kbd "C-c 2") 'split-window)
