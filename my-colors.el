@@ -25,9 +25,11 @@
     (set-face-attribute 'default nil
                         :font "Inconsolata-11"
                         ))
-(require 'color-theme)
-(require 'color-theme-tomorrow)
-(require 'color-theme-solarized)
+;; (require 'color-theme)
+;; (require 'color-theme-tomorrow)
+;; (require 'color-theme-solarized)
+
+;; (mapcar #'disable-theme custom-enabled-themes)   
 
 ;; color-theme-comida 
 ;; color-theme-hober  // dark red/white
@@ -35,13 +37,16 @@
 ;; color-theme-pok-wob
 ;; color-theme-id-dark
 ;; color-theme-xemacs // light white blue
-;; color-theme-jsc-light2 // light high contrast
+;; color-theme-jsc-light2 // light no contrast
 ;; color-theme-tomorrow // light higher contrast
 
-;;(load "cool-blue")
-;;(color-theme-cool-blue)
+;; color-theme-tomorrow // light higher contrast
+(if (functionp 'set-face-attribute) 
+    (set-face-attribute 'default nil
+                        :font "Inconsolata-12"
+                        ))
 ;;(color-theme-solarized-dark)
-(color-theme-tomorrow-night-bright)
+;; (color-theme-tomorrow-night-bright)
 
 ;; (color-theme-comidia) ;; dark orange/blue
 ;; (color-theme-pok-wob) ;; dark yellow/white
