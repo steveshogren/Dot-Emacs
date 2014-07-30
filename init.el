@@ -77,22 +77,6 @@
 (evil-mode 1)
 (show-paren-mode t)
 
-
-;; insert mode window move
-(define-key evil-insert-state-map (kbd "C-w") nil)
-(define-prefix-command 'window-move-map)
-(define-key evil-insert-state-map (kbd "C-w") window-move-map)
-(define-key evil-insert-state-map (kbd "C-w l") 'evil-window-right)
-(define-key evil-insert-state-map (kbd "C-w j") 'evil-window-down)
-(define-key evil-insert-state-map (kbd "C-w k") 'evil-window-up)
-(define-key evil-insert-state-map (kbd "C-w h") 'evil-window-left)
-(define-key evil-motion-state-map (kbd "k") nil)
-(define-key evil-motion-state-map (kbd "j") nil)
-(define-key evil-motion-state-map (kbd "l") nil)
-(define-key evil-motion-state-map (kbd "h") nil)
-
-
-
 ;; change magit diff colors
 (eval-after-load 'magit
   '(progn

@@ -15,6 +15,19 @@
 ;;(global-set-key (kbd "C-x i") 'anything-imenu)
 
 
+;; Evil bindings
+(define-key evil-insert-state-map (kbd "C-w") nil)
+(define-prefix-command 'window-move-map)
+(define-key evil-insert-state-map (kbd "C-w") window-move-map)
+(define-key evil-insert-state-map (kbd "C-w l") 'evil-window-right)
+(define-key evil-insert-state-map (kbd "C-w j") 'evil-window-down)
+(define-key evil-insert-state-map (kbd "C-w k") 'evil-window-up)
+(define-key evil-insert-state-map (kbd "C-w h") 'evil-window-left)
+(define-key evil-motion-state-map (kbd "k") nil)
+(define-key evil-motion-state-map (kbd "j") nil)
+(define-key evil-motion-state-map (kbd "l") nil)
+(define-key evil-motion-state-map (kbd "h") nil)
+
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
@@ -49,30 +62,6 @@
 
 
 (global-set-key (kbd "<f3>") 'comment-or-uncomment-region)
-;; (global-set-key (kbd "C-k") 'save-buffer)
-;; (define-prefix-command 'ctrlk-prefix-map)
-;; (global-set-key (kbd "C-k") 'ctrlk-prefix-map)
-
-;;(define-key slime-mode-map "C-x C-r" 'slime-eval-last-expression)
-
-(defun sas-shell-modes-hook ()
-  (define-key comint-mode-map (kbd "C-j") 'comint-next-input)
-  (define-key comint-mode-map (kbd "C-k") 'comint-previous-input)
-  )
-(add-hook 'comint-mode-hook 'sas-shell-modes-hook)
-(defun doc-keys ()
-  (define-key doc-view-mode-map "j" 'doc-view-scroll-up-or-next-page)
-  (define-key doc-view-mode-map "k" 'doc-view-scroll-down-or-previous-page)
-  (define-key doc-view-mode-map "n" 'doc-view-search-next-match)
-  (define-key doc-view-mode-map "N" 'doc-view-search-previous-match)
-  (define-key doc-view-mode-map "/" 'doc-view-search)
-  (define-prefix-command 'window-move-map)
-  (define-key doc-view-mode-map "\C-w" 'window-move-map)
-  (define-key doc-view-mode-map "\C-w l" 'evil-window-right)
-  (define-key doc-view-mode-map "\C-w h" 'evil-window-left)
-  )
-
-(add-hook 'doc-view-mode-hook 'doc-keys)
 
 (defun string/ends-with (string suffix)
       "Return t if STRING ends with SUFFIX."
