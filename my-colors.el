@@ -25,8 +25,8 @@
     (set-face-attribute 'default nil
                         :font "Inconsolata-11"
                         ))
-;; (require 'color-theme)
-;; (require 'color-theme-tomorrow)
+(require 'color-theme)
+(require 'color-theme-tomorrow)
 ;; (require 'color-theme-solarized)
 
 ;; (mapcar #'disable-theme custom-enabled-themes)   
@@ -43,10 +43,10 @@
 ;; color-theme-tomorrow // light higher contrast
 (if (functionp 'set-face-attribute) 
     (set-face-attribute 'default nil
-                        :font "Inconsolata-12"
+                        :font "Inconsolata-11"
                         ))
 ;;(color-theme-solarized-dark)
-;; (color-theme-tomorrow-night-bright)
+(color-theme-tomorrow-night-bright)
 
 ;; (color-theme-comidia) ;; dark orange/blue
 ;; (color-theme-pok-wob) ;; dark yellow/white

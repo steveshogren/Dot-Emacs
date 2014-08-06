@@ -23,10 +23,6 @@
 (define-key evil-insert-state-map (kbd "C-w j") 'evil-window-down)
 (define-key evil-insert-state-map (kbd "C-w k") 'evil-window-up)
 (define-key evil-insert-state-map (kbd "C-w h") 'evil-window-left)
-(define-key evil-motion-state-map (kbd "k") nil)
-(define-key evil-motion-state-map (kbd "j") nil)
-(define-key evil-motion-state-map (kbd "l") nil)
-(define-key evil-motion-state-map (kbd "h") nil)
 
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -52,14 +48,12 @@
 (global-set-key (kbd "C-x C-u") 'winner-undo)
 (global-set-key (kbd "C-x C-o") 'winner-redo)
 
-
 (global-set-key (kbd "C-c r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-c C-r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-x C-r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-x r") 'slime-eval-last-expression) 
 (global-set-key (kbd "C-x t") 'fill-paragraph) 
 (global-set-key (kbd "C-x C-t") 'fill-paragraph) 
-
 
 (global-set-key (kbd "<f3>") 'comment-or-uncomment-region)
 
