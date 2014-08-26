@@ -8,6 +8,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/geiser/elisp/")
 (require 'geiser)
+(require 'evil)
 ;;(load-file "~/.emacs.d/geiser/elisp/geiser.el")
 
 
@@ -73,7 +74,6 @@
 (global-linum-mode 1)
 
 ;; enable evil
-(require 'evil)
 (evil-mode 1)
 (show-paren-mode t)
 
@@ -89,6 +89,9 @@
 (add-hook 'magit-status-mode-hook 'disable-magit-highlight-in-buffer)
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+(setq evil-default-cursor t)
+;; (set-cursor-color "#ffffff") 
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
