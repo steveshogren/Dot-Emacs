@@ -37,7 +37,6 @@
 (load "fsharp.el")
 (load "enable-paredit.el")
 
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 (when (not (package-installed-p 'helm))
    (package-install 'helm))
@@ -55,7 +54,9 @@
 
 (load "js-settings.el")
 (load "haskell-settings.el")
+(load "scheme-settings.el")
 (load "clojure-settings.el")
+(load "emacs-lisp-settings.el")
 
 (require 'anything-match-plugin)
 (require 'anything-config)

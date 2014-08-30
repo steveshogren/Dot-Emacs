@@ -12,6 +12,7 @@
 
 (define-key global-map (kbd "C-M-h") 'pop-tag-mark)
 (define-key global-map "\M-o" 'next-buffer)
+(define-key global-map "\M-u" 'previous-buffer)
 
 
 ;; (global-set-key (kbd "C-x b") 'anything-mini)
