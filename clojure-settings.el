@@ -12,7 +12,7 @@
 (setq cider-repl-use-clojure-font-lock t)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-
+(add-hook 'cider-repl-mode-hook 'auto-complete-mode)
 
 (define-key clojure-mode-map (kbd "C-q") 'cider-jump)
 (define-key clojure-mode-map (kbd "C-M-h") 'cider-jump-back)

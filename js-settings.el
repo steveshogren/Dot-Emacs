@@ -3,11 +3,9 @@
 (unless (package-installed-p 'ac-js2)
   (package-install 'ac-js2))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(unless (package-installed-p 'auto-complete)
-  (package-install 'auto-complete))
 
+(add-hook 'js2-mode-hook 'auto-complete-mode)
 (defun js-set ()
   (define-key js2-mode-map (kbd "C-q") 'ac-js2-jump-to-definition)
-  (define-key js2-mode-map (kbd "C-SPC") 'ac-js2-expand-function)
   )
 (add-hook 'js2-mode-hook 'js-set)

@@ -3,12 +3,14 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(global-set-key (kbd "C-SPC") 'auto-complete)
 (global-set-key (kbd "C-c g") 'helm-git-grep)
 (global-set-key (kbd "C-*") 'helm-git-grep-at-point)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
+(define-key global-map (kbd "C-M-h") 'pop-tag-mark)
 (define-key global-map "\M-o" 'next-buffer)
 
 

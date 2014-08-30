@@ -28,6 +28,9 @@
 (package-initialize)
 
 
+(unless (package-installed-p 'auto-complete)
+  (package-install 'auto-complete))
+
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 
