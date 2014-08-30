@@ -34,27 +34,14 @@
 (load "fsharp.el")
 (load "enable-paredit.el")
 
-(unless (package-installed-p 'cider)
-  (package-install 'cider))
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(setq cider-repl-pop-to-buffer-on-connect nil)
-;; (set cider-repl-result-prefix ";; => ")
-(setq cider-repl-use-clojure-font-lock t)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
-(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 (when (not (package-installed-p 'helm))
    (package-install 'helm))
-(when (not (package-installed-p 'haskell-mode))
-   (package-install 'haskell-mode))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook (lambda () (setq evil-auto-indent nil)))
-
 (require 'helm-config)
 (require 'helm-git-grep)
-(global-set-key (kbd "C-c g") 'helm-git-grep)
-(global-set-key (kbd "C-*") 'helm-git-grep-at-point)
-;; (toggle-frame-fullscreen)
+
+
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -63,6 +50,8 @@
 (load "my-colors.el")
 (load "desktopsaves.el")
 
+(load "js-settings.el")
+(load "haskell-settings.el")
 (load "clojure-settings.el")
 
 (require 'anything-match-plugin)
@@ -91,7 +80,7 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 (setq evil-default-cursor t)
-;; (set-cursor-color "#ffffff") 
+(set-cursor-color "#0000cd") 
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
