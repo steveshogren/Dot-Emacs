@@ -9,7 +9,7 @@
 (add-to-list 'load-path "~/.emacs.d/geiser/elisp/")
 (require 'geiser)
 (require 'evil)
-;;(load-file "~/.emacs.d/geiser/elisp/geiser.el")
+(evil-mode 1)
 
 
 (defun gsl-runner ()
@@ -19,10 +19,8 @@
 
 ;; Marmalade Package Manager
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
@@ -34,10 +32,6 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 
-(load "fsharp.el")
-(load "enable-paredit.el")
-
-
 (when (not (package-installed-p 'helm))
    (package-install 'helm))
 (require 'helm-config)
@@ -48,6 +42,8 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 
+(load "fsharp.el")
+(load "enable-paredit.el")
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
@@ -57,6 +53,7 @@
 (load "scheme-settings.el")
 (load "clojure-settings.el")
 (load "emacs-lisp-settings.el")
+(load "magit-settings.el")
 
 (require 'anything-match-plugin)
 (require 'anything-config)
@@ -67,21 +64,7 @@
 (global-linum-mode 1)
 
 ;; enable evil
-(evil-mode 1)
 (show-paren-mode t)
-
-;; change magit diff colors
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")
-     (when (not window-system)
-       (set-face-background 'magit-item-highlight "black"))))
-(defun disable-magit-highlight-in-buffer () 
-  (face-remap-add-relative 'magit-item-highlight '()))
-(add-hook 'magit-status-mode-hook 'disable-magit-highlight-in-buffer)
-
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 (setq evil-default-cursor t)
 (set-cursor-color "#0000cd") 

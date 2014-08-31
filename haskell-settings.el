@@ -1,7 +1,5 @@
-
 (when (not (package-installed-p 'haskell-mode))
    (package-install 'haskell-mode))
-
 
 (defun string/ends-with (string suffix)
       "Return t if STRING ends with SUFFIX."
@@ -36,6 +34,8 @@
   (define-key haskell-mode-map (kbd "<f4>") 'haskell-repl-c)
   (define-key haskell-mode-map (kbd "<f5>") 'haskell-repl-c)
   )
+
 (add-hook 'haskell-mode-hook 'haskell-modes-hook)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook (lambda () (setq evil-auto-indent nil)))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
