@@ -23,7 +23,7 @@
 (setq-default indent-tabs-mode nil)
 (if (functionp 'set-face-attribute) 
     (set-face-attribute 'default nil
-                        :font "Inconsolata-11"
+                        :font "Inconsolata-12"
                         ))
 (require 'color-theme)
 (require 'color-theme-tomorrow)
