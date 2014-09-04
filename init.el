@@ -25,7 +25,6 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-
 (unless (package-installed-p 'auto-complete)
   (package-install 'auto-complete))
 
