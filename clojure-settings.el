@@ -11,7 +11,10 @@
   (package-install 'cider))
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (setq cider-repl-pop-to-buffer-on-connect nil)
+(setq cider-auto-select-error-buffer nil)
 ;; (set cider-repl-result-prefix ";; => ")
+
+(setq cider-stacktrace-default-filters '(tooling dup))
 
 (setq cider-repl-use-clojure-font-lock t)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
