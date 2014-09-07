@@ -12,7 +12,13 @@
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-auto-select-error-buffer nil)
+
 ;; (set cider-repl-result-prefix ";; => ")
+
+
+(unless (package-installed-p 'ac-cider)
+  (package-install 'ac-cider))
+
 
 (setq cider-stacktrace-default-filters '(tooling dup))
 
@@ -24,6 +30,13 @@
 (define-key clojure-mode-map (kbd "C-q") 'cider-jump)
 (define-key clojure-mode-map (kbd "C-M-h") 'cider-jump-back)
 (define-key clojure-mode-map (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
+
+
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-mode))
 
 ;; (global-set-key (kbd "C-q") 'cider-jump)
 ;; (global-set-key (kbd "C-M-h") 'cider-jump-back)
