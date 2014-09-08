@@ -120,4 +120,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(helm-ff-directory ((t (:foreground "#70c0b1")))))
+ '(helm-ff-directory ((t (:foreground "#70c0b1"))))
+ '(magit-diff-add ((t (:foreground "green3"))))
+ '(magit-diff-del ((t (:foreground "red3"))))
+ '(magit-log-head-label-bisect-bad ((t (:foreground "#d54e53" :box 1))))
+ '(magit-log-head-label-bisect-good ((t (:foreground "#b9ca4a" :box 1))))
+ '(magit-log-head-label-bisect-skip ((t (:foreground "dark goldenrod" :box 1))))
+ '(magit-log-head-label-default ((t (:foreground "#e7c547" :box nil :weight bold))))
+ '(magit-log-head-label-patches ((t (:foreground "IndianRed4" :box 1)))))
