@@ -1,3 +1,5 @@
+(unless (package-installed-p 'color-theme-sanityinc-tomorrow)
+  (package-install 'color-theme-sanityinc-tomorrow))
 
 (require 'golden-ratio)
 ;; this is needed to add the evil commands to
@@ -45,7 +47,7 @@
     (set-face-attribute 'default nil
                         :font "Inconsolata-12"
                         ))
-(color-theme-tomorrow-night-bright)
+(color-theme-sanityinc-tomorrow-bright)
 
 (setq visible-bell t)
 (setq default-tab-width 4)

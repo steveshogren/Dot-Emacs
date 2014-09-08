@@ -302,7 +302,7 @@
 	    ((:url . "http://elpa.gnu.org/packages/omn-mode.html")
 	     (:keywords))])
  (org .
-      [(20140825)
+      [(20140901)
        nil "Outline-based notes management and organizer" tar nil])
  (osc .
       [(0 1)
@@ -412,7 +412,7 @@
  (web-server .
 	     [(0 1 1)
 	      ((emacs
-		(24 4)))
+		(24 3)))
 	      "Emacs Web Server" tar
 	      ((:keywords "http" "server" "network")
 	       (:url . "https://github.com/eschulte/emacs-web-server"))])
