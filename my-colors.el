@@ -43,7 +43,7 @@
 ;; color-theme-tomorrow // light higher contrast
 (if (functionp 'set-face-attribute) 
     (set-face-attribute 'default nil
-                        :font "Inconsolata-14"
+                        :font "Inconsolata-12"
                         ))
 (color-theme-tomorrow-night-bright)
 

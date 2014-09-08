@@ -38,9 +38,15 @@
 (require 'helm-git-grep)
 
 
-(scroll-bar-mode 0)
-(tool-bar-mode 0)
-(menu-bar-mode 0)
+;;(scroll-bar-mode 0)
+;;(tool-bar-mode 0)
+;;(menu-bar-mode 0)
+(tabbar-mode)
+(defun my-tabbar-buffer-groups ()
+   (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+               ((eq major-mode 'dired-mode) "emacs")
+               (t "user"))))
+(setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
 (load "fsharp.el")
 (load "enable-paredit.el")
