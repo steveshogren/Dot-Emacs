@@ -46,6 +46,7 @@
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
+(load "helm-settings.el")
 
 (load "js-settings.el")
 (load "haskell-settings.el")
