@@ -29,8 +29,6 @@
 (require 'button)
 (require 'dash)
 (require 'easymenu)
-(require 'cider-util)
-(require 'cider-client)
 
 ;; Variables
 
@@ -52,13 +50,6 @@ If nil, messages will not be wrapped.  If truthy but non-numeric,
   :type 'list
   :group 'cider-stacktrace
   :package-version '(cider . "0.6.0"))
-
-(defcustom cider-stacktrace-print-level 50
-  "Set the maximum level of nested data to print.
-Used when displaying stacktrace data (used for clojure's *print-level*)."
-  :type '(choice integer (const nil))
-  :group 'cider
-  :package-version '(cider . "0.8.0"))
 
 (defvar cider-stacktrace-detail-max 2
   "The maximum detail level for causes.")
@@ -171,7 +162,7 @@ Used when displaying stacktrace data (used for clojure's *print-level*)."
         ["Show/hide all frames" cider-stacktrace-toggle-all]))
     map))
 
-(define-derived-mode cider-stacktrace-mode special-mode "Stacktrace"
+(define-derived-mode cider-stacktrace-mode fundamental-mode "Stacktrace"
   "Major mode for filtering and navigating CIDER stacktraces.
 
 \\{cider-stacktrace-mode-map}"
@@ -398,24 +389,25 @@ it wraps to 0."
 
 (defun cider-stacktrace-navigate (button)
   "Navigate to the stack frame source represented by the BUTTON."
-  (let* ((var (button-get button 'var))
-         (class (button-get button 'class))
-         (method (button-get button 'method))
-         (info (or (and var (cider-var-info var))
-                   (and class method (cider-member-info class method))
-                   `(("file" ,(button-get button 'file)))))
-         ;; stacktrace returns more accurate line numbers
-         (info (cons `("line" ,(button-get button 'line))
-                     info)))
-    (cider--jump-to-loc-from-info info t)))
+  (let ((var (button-get button 'var))
+        (class (button-get button 'class))
+        (method (button-get button 'method))
+        (line (button-get button 'line)))
+    (-if-let* ((info (if var
+                         (cider-var-info var)
+                       (cider-member-info class method)))
+               (file (cadr (assoc "file" info)))
+               (buffer (cider-find-file file)))
+        (cider-jump-to buffer line)
+      (message "No source info"))))
 
 (defun cider-stacktrace-jump ()
-  "Like `cider-jump-to-var', but uses the stack frame source at point, if available."
+  "Like `cider-jump', but uses the stack frame source at point, if available."
   (interactive)
   (let ((button (button-at (point))))
     (if (and button (button-get button 'line))
         (cider-stacktrace-navigate button)
-      (call-interactively 'cider-jump-to-var))))
+      (call-interactively 'cider-jump))))
 
 
 ;; Rendering
@@ -462,8 +454,8 @@ This associates text properties to enable filtering and source navigation."
                                     (if (member 'clj flags) ns class)
                                     (if (member 'clj flags) fn method))
                             'var var 'class class 'method method
-                            'name name 'file file 'line line
-                            'flags flags 'follow-link t
+                            'name name 'line line 'flags flags
+                            'follow-link t
                             'action 'cider-stacktrace-navigate
                             'help-echo "View source at this location"
                             'face 'cider-stacktrace-face)

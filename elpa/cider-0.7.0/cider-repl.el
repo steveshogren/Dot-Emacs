@@ -43,7 +43,6 @@
   (defvar paredit-version)
   (defvar paredit-space-for-delimiter-predicates))
 
-
 (defgroup cider-repl nil
   "Interaction with the REPL."
   :prefix "cider-repl-"
@@ -116,7 +115,6 @@ you'd like to use the default Emacs behavior use
   :type 'symbol
   :group 'cider-repl)
 
-
 ;;;; REPL buffer local variables
 (defvar-local cider-repl-input-start-mark nil)
 
@@ -153,66 +151,82 @@ joined together.")
     (set markname (make-marker))
     (set-marker (symbol-value markname) (point))))
 
-
 ;;; REPL init
-(defun cider-repl-buffer-name (&optional project-dir host port)
-  "Generate a REPL buffer name based on current connection buffer.
-PROJECT-DIR, PORT and HOST are as in `nrepl-make-buffer-name'."
-  (with-current-buffer (or (get-buffer (nrepl-current-connection-buffer))
-                           (current-buffer))
-    (nrepl-make-buffer-name nrepl-repl-buffer-name-template project-dir host port)))
+(defun cider-repl-buffer-name ()
+  "Generate a REPL buffer name based on current connection buffer."
+  (with-current-buffer (get-buffer (nrepl-current-connection-buffer))
+    (nrepl-buffer-name nrepl-repl-buffer-name-template)))
 
-(defun cider-repl-create (&optional project-dir host port)
-  "Create a REPL buffer and install `cider-repl-mode'.
-PROJECT-DIR, PORT and HOST are as in `nrepl-make-buffer-name'."
-  ;; Connection might not have been set as yet. Please don't send requests here.
-  (let ((buf (nrepl-make-buffer-name nrepl-repl-buffer-name-template
-                                     project-dir host port)))
-    (with-current-buffer (get-buffer-create buf)
-      (unless (derived-mode-p 'cider-repl-mode)
-        (cider-repl-mode))
-      (cider-repl-reset-markers))
-    buf))
+(defun cider-create-repl-buffer ()
+  "Create a REPL buffer."
+  (cider-init-repl-buffer
+   (let ((buffer-name (cider-repl-buffer-name)))
+     (if cider-repl-display-in-current-window
+         (add-to-list 'same-window-buffer-names buffer-name))
+     (if cider-repl-pop-to-buffer-on-connect
+         (pop-to-buffer buffer-name)
+       (generate-new-buffer buffer-name))
+     buffer-name)))
 
-(defun cider-repl-init (buffer &optional no-banner)
-  "Initialize the REPL in BUFFER.
-BUFFER must be a REPL buffer with `cider-repl-mode' and a running
-client process connection. Unless NO-BANNER is non-nil, insert a banner."
-  (unless no-banner
-    (cider-repl--insert-banner-and-prompt buffer))
-  (when cider-repl-display-in-current-window
-    (add-to-list 'same-window-buffer-names buffer))
-  (when cider-repl-pop-to-buffer-on-connect
-    (pop-to-buffer buffer))
-  (cider-remember-clojure-buffer cider-current-clojure-buffer)
-  buffer)
+(defun cider-make-repl (process)
+  "Make a REPL for the connection PROCESS."
+  (let ((connection-buffer (process-buffer process))
+        (repl-buffer (cider-create-repl-buffer)))
+    (with-current-buffer repl-buffer
+      (setq nrepl-connection-buffer (buffer-name connection-buffer)))
+    (with-current-buffer connection-buffer
+      (setq nrepl-repl-buffer (buffer-name repl-buffer)))))
 
 (defun cider-repl--banner ()
   "Generate the welcome REPL buffer banner."
-  (format "; CIDER %s (Java %s, Clojure %s, nREPL %s)"
+  (format "; CIDER %s (Java %s, Clojure %s, nREPL %s, cider-nrepl %s)"
           (cider--version)
           (cider--java-version)
           (cider--clojure-version)
-          (cider--nrepl-version)))
+          (cider--nrepl-version)
+          (cider--nrepl-middleware-version)))
 
-(defun cider-repl--insert-banner-and-prompt (buffer)
-  "Insert REPL banner and REPL prompt in BUFFER."
+(defun cider-repl--insert-banner-and-prompt (ns)
+  "Insert REPL banner and REPL prompt, taking into account NS."
+  (when (zerop (buffer-size))
+    (insert (propertize (cider-repl--banner) 'face 'font-lock-comment-face)))
+  (let ((middleware-version (cider--nrepl-middleware-version)))
+    (unless (and middleware-version (equal cider-version middleware-version))
+      (insert (propertize (format "\nWARNING: CIDER's version (%s) does not match cider-nrepl's version (%s)" cider-version middleware-version) 'face 'font-lock-warning-face))))
+  (goto-char (point-max))
+  (cider-repl--mark-output-start)
+  (cider-repl--mark-input-start)
+  (cider-repl--insert-prompt ns))
+
+(defun cider-init-repl-buffer (buffer &optional noprompt)
+  "Initialize the REPL in BUFFER.
+Insert a banner, unless NOPROMPT is non-nil."
   (with-current-buffer buffer
-    (when (zerop (buffer-size))
-      (insert (propertize (cider-repl--banner) 'face 'font-lock-comment-face)))
-    (goto-char (point-max))
-    (cider-repl--mark-output-start)
-    (cider-repl--mark-input-start)
-    (cider-repl--insert-prompt nrepl-buffer-ns)))
+    (unless (eq major-mode 'cider-repl-mode)
+      (cider-repl-mode))
+    (cider-repl-reset-markers)
+    ;; honor :init-ns from lein's :repl-options on startup
+    (setq nrepl-buffer-ns (cider-eval-and-get-value "(str *ns*)"))
+    (unless noprompt
+      (cider-repl--insert-banner-and-prompt nrepl-buffer-ns))
+    (cider-remember-clojure-buffer cider-current-clojure-buffer)
+    (current-buffer)))
 
-(defun cider-get-repl-buffer ()
-  "Return the REPL buffer for current connection."
-  (let ((buffer (get-buffer-create (cider-current-repl-buffer))))
-    (if (buffer-live-p buffer)
-        buffer
-      (error "No active REPL"))))
+(defun cider-find-or-create-repl-buffer ()
+  "Return the REPL buffer, create it if necessary."
+  (let ((buffer (cider-current-repl-buffer)))
+        (if (null buffer)
+                (error "No active nREPL connection")
+          (let ((buffer (get-buffer buffer)))
+                (or (when (buffer-live-p buffer) buffer)
+                        (let ((buffer (nrepl-current-connection-buffer)))
+                          (if (null buffer)
+                                  (error "No active nREPL connection")
+                                (cider-init-repl-buffer
+                                 (get-process buffer)
+                                 (get-buffer-create
+                                  (cider-repl-buffer-name))))))))))
 
-
 ;;; REPL interaction
 
 (defun cider-repl--in-input-area-p ()
@@ -243,7 +257,7 @@ point."
   "Find the next prompt.
 If BACKWARD is non-nil look backward."
   (let ((origin (point))
-        (prop 'cider-repl-prompt))
+        (prop 'cider-prompt))
     (while (progn
              (cider-search-property-change prop backward)
              (not (or (cider-end-of-proprange-p prop) (bobp) (eobp)))))
@@ -293,13 +307,13 @@ If BACKWARD is non-nil search backward."
 (defun cider-repl-mode-beginning-of-defun (&optional arg)
   (if (and arg (< arg 0))
       (cider-repl-mode-end-of-defun (- arg))
-    (dotimes (_ (or arg 1))
+    (dotimes (i (or arg 1))
       (cider-repl-previous-prompt))))
 
 (defun cider-repl-mode-end-of-defun (&optional arg)
   (if (and arg (< arg 0))
       (cider-repl-mode-beginning-of-defun (- arg))
-    (dotimes (_ (or arg 1))
+    (dotimes (i (or arg 1))
       (cider-repl-next-prompt))))
 
 (defun cider-repl-beginning-of-defun ()
@@ -371,8 +385,8 @@ Return the position of the prompt beginning."
             (prompt (format "%s> " namespace)))
         (cider-propertize-region
             '(face cider-repl-prompt-face read-only t intangible t
-                   cider-repl-prompt t
-                   rear-nonsticky (cider-repl-prompt read-only face intangible))
+                   cider-prompt t
+                   rear-nonsticky (cider-prompt read-only face intangible))
           (insert-before-markers prompt))
         (set-marker cider-repl-prompt-start-mark prompt-start)
         prompt-start))))
@@ -396,37 +410,29 @@ If BOL is non-nil insert at the beginning of line."
               (set-marker cider-repl-output-end (1- (point))))))))
     (cider-repl--show-maximum-output)))
 
-(defun cider-repl--emit-interactive-output (string face)
-  "Emit STRING as interactive output using face."
-  (with-current-buffer (cider-current-repl-buffer)
-    (let ((pos (1- (cider-repl--input-line-beginning-position)))
-          (string (replace-regexp-in-string "\n\\'" "" string)))
-      (cider-repl-emit-output-at-pos (current-buffer) string face pos t)
-      (ansi-color-apply-on-region pos (point-max)))))
-
 (defun cider-repl-emit-interactive-output (string)
   "Emit STRING as interactive output."
-  (cider-repl--emit-interactive-output string 'cider-repl-output-face))
+  (with-current-buffer (cider-current-repl-buffer)
+    (let ((pos (1- (cider-repl--input-line-beginning-position))))
+      (cider-repl-emit-output-at-pos (current-buffer) string 'cider-repl-output-face pos t)
+      (ansi-color-apply-on-region pos (point-max)))))
 
-(defun cider-repl-emit-interactive-err-output (string)
-  "Emit STRING as interactive err output."
-  (cider-repl--emit-interactive-output string 'cider-repl-err-output-face))
-
-(defun cider-repl--emit-output (buffer string face &optional bol)
-  "Using BUFFER, emit STRING font-locked with FACE.
+(defun cider-repl-emit-output (buffer string &optional bol)
+  "Using BUFFER, emit STRING.
 If BOL is non-nil, emit at the beginning of the line."
   (with-current-buffer buffer
     (let ((pos (1- (cider-repl--input-line-beginning-position))))
-      (cider-repl-emit-output-at-pos buffer string face cider-repl-input-start-mark bol)
+      (cider-repl-emit-output-at-pos buffer string 'cider-repl-output-face cider-repl-input-start-mark bol)
       (ansi-color-apply-on-region pos (point-max)))))
 
-(defun cider-repl-emit-output (buffer string)
-  "Using BUFFER, emit STRING as standard output."
-  (cider-repl--emit-output buffer string 'cider-repl-output-face))
-
-(defun cider-repl-emit-err-output (buffer string)
-  "Using BUFFER, emit STRING as error output."
-  (cider-repl--emit-output buffer string 'cider-repl-err-output-face))
+;; TODO: Factor out repeated code
+(defun cider-repl-emit-err-output (buffer string &optional bol)
+  "Using BUFFER, emit STRING.
+If BOL is non-nil, emit at the beginning of the line."
+  (with-current-buffer buffer
+    (let ((pos (1- (cider-repl--input-line-beginning-position))))
+      (cider-repl-emit-output-at-pos buffer string 'cider-repl-err-output-face cider-repl-input-start-mark bol)
+      (ansi-color-apply-on-region pos (point-max)))))
 
 (defun cider-repl-emit-prompt (buffer)
   "Emit the REPL prompt into BUFFER."
@@ -496,9 +502,9 @@ the symbol."
                ;; Keep stepping over blanks and sexps until the end of
                ;; buffer is reached or an error occurs. Tolerate extra
                ;; close parens.
-               (cl-loop do (skip-chars-forward " \t\r\n)")
-                        until (eobp)
-                        do (forward-sexp))
+               (loop do (skip-chars-forward " \t\r\n)")
+                     until (eobp)
+                     do (forward-sexp))
                t)))
           (t t))))
 
@@ -670,11 +676,11 @@ namespace to switch to."
                        (cider-current-ns))))
   (if ns
       (with-current-buffer (cider-current-repl-buffer)
-        (setq nrepl-buffer-ns ns)
-        (cider-repl-emit-prompt (current-buffer)))
+        (cider-eval
+         (format "(in-ns '%s)" ns)
+         (cider-repl-handler (current-buffer))))
     (error "Cannot determine the current namespace")))
 
-
 ;;;;; History
 
 (defcustom cider-repl-wrap-history nil
@@ -720,10 +726,10 @@ Return -1 resp the length of the history if no item matches."
                  (backward 1)))
          (history cider-repl-input-history)
          (len (length history)))
-    (cl-loop for pos = (+ start-pos step) then (+ pos step)
-             if (< pos 0) return -1
-             if (<= len pos) return len
-             if (string-match regexp (nth pos history)) return pos)))
+    (loop for pos = (+ start-pos step) then (+ pos step)
+          if (< pos 0) return -1
+          if (<= len pos) return len
+          if (string-match regexp (nth pos history)) return pos)))
 
 (defun cider-repl--history-replace (direction &optional regexp)
   "Replace the current input with the next line in DIRECTION.
@@ -894,7 +900,6 @@ constructs."
   (append (cl-subseq session-hist 0 n-added-items)
           file-hist))
 
-
 ;;; REPL shortcuts
 (defcustom cider-repl-shortcut-dispatch-char ?\,
   "Character used to distinguish REPL commands from Lisp forms."
@@ -943,7 +948,7 @@ constructs."
          (call-interactively (gethash command cider-repl-shortcuts))
        (error "No command selected")))))
 
-
+
 ;;;;; CIDER REPL mode
 
 ;;; Prevent paredit from inserting some inappropriate spaces.
@@ -978,7 +983,7 @@ ENDP) DELIM."
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map clojure-mode-map)
     (define-key map (kbd "C-c C-d") 'cider-doc-map)
-    (define-key map (kbd "M-.") 'cider-jump-to-var)
+    (define-key map (kbd "M-.") 'cider-jump)
     (define-key map (kbd "M-,") 'cider-jump-back)
     (define-key map (kbd "C-c M-.") 'cider-jump-to-resource)
     (define-key map (kbd "RET") 'cider-repl-return)
@@ -1022,7 +1027,7 @@ ENDP) DELIM."
         "--"
         ,cider-doc-menu
         "--"
-        ["Jump to source" cider-jump-to-var]
+        ["Jump to source" cider-jump]
         ["Jump to resource" cider-jump-to-resource]
         ["Jump back" cider-jump-back]
         "--"
