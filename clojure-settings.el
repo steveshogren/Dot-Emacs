@@ -12,7 +12,16 @@
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-auto-select-error-buffer nil)
+(setq nrepl-hide-special-buffers t)
+
 ;; (set cider-repl-result-prefix ";; => ")
+
+;; USE FOR DEFAULTING TO 7888
+;; (setq cider-known-endpoints '(("host-a" "10.10.10.1" "7888") ("host-b" "7888")))
+
+(unless (package-installed-p 'ac-cider)
+  (package-install 'ac-cider))
+
 
 (setq cider-stacktrace-default-filters '(tooling dup))
 
@@ -25,6 +34,10 @@
 (define-key clojure-mode-map (kbd "C-M-h") 'cider-jump-back)
 (define-key clojure-mode-map (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
 
-;; (global-set-key (kbd "C-q") 'cider-jump)
-;; (global-set-key (kbd "C-M-h") 'cider-jump-back)
-;; (global-set-key (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
+
+;; (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+;; (add-hook 'cider-mode-hook 'ac-cider-setup)
+;; (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-mode))
+
