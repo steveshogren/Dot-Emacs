@@ -105,7 +105,7 @@
 (show-paren-mode t)
 
 (setq evil-default-cursor t)
-(set-cursor-color "#0000cd") 
+(set-cursor-color "#ffffff") 
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
