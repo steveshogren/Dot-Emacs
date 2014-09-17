@@ -61,11 +61,6 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 
-(when (not (package-installed-p 'helm))
-   (package-install 'helm))
-(require 'helm-config)
-(require 'helm-git-grep)
-
 
 ;;(scroll-bar-mode 0)
 ;;(tool-bar-mode 0)
@@ -82,6 +77,13 @@
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
+
+(when (not (package-installed-p 'helm))
+   (package-install 'helm))
+(require 'helm-config)
+(require 'helm-git-grep)
+(require 'helm-ls-git)
+
 (load "helm-settings.el")
 
 (load "js-settings.el")
