@@ -11,8 +11,6 @@
         :buffer "*helm-find-buffers*"
         :default-directory "/home/web/development/cloudant-listener"))
 
-(global-set-key (kbd "C-x C-b") 'helm-buffers-and-recent)
-(global-set-key (kbd "C-x b") 'helm-buffers-and-recent)
 
 (defun helm-co ()
   (interactive)
@@ -24,4 +22,8 @@
         :default-directory "/home/web/development/cloudant-listener"))
 
 (global-set-key (kbd "C-S-t") 'helm-ls-git-ls)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-and-recent)
+(global-set-key (kbd "C-x b") 'helm-buffers-and-recent)
+
+(global-set-key (kbd "C-S-f") 'helm-git-grep)
 

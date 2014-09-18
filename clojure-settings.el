@@ -31,7 +31,9 @@
 (add-hook 'cider-repl-mode-hook 'auto-complete-mode)
 
 (define-key clojure-mode-map (kbd "C-q") 'cider-jump)
+(define-key clojure-mode-map (kbd "<f12>") 'cider-jump)
 (define-key clojure-mode-map (kbd "C-M-h") 'cider-jump-back)
+(define-key clojure-mode-map (kbd "C--") 'cider-jump-back)
 (define-key clojure-mode-map (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
 
 
