@@ -41,3 +41,4 @@
 (eval-after-load "auto-complete"
   '(add-to-list 'ac-modes 'cider-mode))
 
+(add-hook 'cider-mode-hook 'auto-complete-mode)
