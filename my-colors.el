@@ -43,10 +43,12 @@
 
 
 ;; color-theme-tomorrow // light higher contrast
-(if (functionp 'set-face-attribute) 
-    (set-face-attribute 'default nil
-                        :font "Inconsolata-12"
-                        ))
+
+(if window-system
+    (if (functionp 'set-face-attribute) 
+        (set-face-attribute 'default nil
+                            :font "Inconsolata-11"
+                            )))
 (color-theme-sanityinc-tomorrow-bright)
 
 (setq visible-bell t)

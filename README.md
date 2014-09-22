@@ -1,9 +1,7 @@
 # To Use:
-* Checkout repository to "~/Dot-Emacs/"
+* Checkout repository to "~/.emacs.d/"
 
-Add the following to .emacs file:
-
-```lisp
-(add-to-list 'load-path "~/Dot-Emacs/")
-(load "init")
+```bash
+cd ~
+git clone https://github.com/steveshogren/Dot-Emacs.git .emacs.d
 ```
