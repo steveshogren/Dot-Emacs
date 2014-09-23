@@ -60,5 +60,8 @@
 
 (global-set-key (kbd "<f3>") 'comment-or-uncomment-region)
 
+;; (global-set-key (kbd "C-z") nil)
+
+
 
 

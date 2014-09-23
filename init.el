@@ -26,7 +26,7 @@
  '(magit-log-head-label-default ((t (:foreground "#e7c547" :box nil :weight bold))) t)
  '(magit-log-head-label-patches ((t (:foreground "IndianRed4" :box 1)))))
 
-
+(setq comint-scroll-show-maximum-output 1)
 ;; To use: checkout git repo into ~/.emacs.d/
 
 (add-to-list 'load-path "~/.emacs.d/")
