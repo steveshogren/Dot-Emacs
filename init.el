@@ -37,6 +37,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/geiser/elisp/")
 (require 'geiser)
+(setq evil-toggle-key "C-M-~")
 (require 'evil)
 (evil-mode 1)
 
