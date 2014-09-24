@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-auto-show-menu 0.0)
  '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector ["#534636" "#cb6077" "#beb55b" "#f4bc87" "#8ab3b5" "#a89bb9" "#8ab3b5" "#e9e1dd"])
  '(ansi-term-color-vector [unspecified "#534636" "#cb6077" "#beb55b" "#f4bc87" "#8ab3b5" "#a89bb9" "#8ab3b5" "#e9e1dd"])
@@ -18,13 +19,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-ff-directory ((t (:foreground "#70c0b1"))))
- '(magit-diff-add ((t (:foreground "green3"))))
- '(magit-diff-del ((t (:foreground "red3"))))
+ '(magit-diff-add ((t (:foreground "green3"))) t)
+ '(magit-diff-del ((t (:foreground "red3"))) t)
  '(magit-log-head-label-bisect-bad ((t (:foreground "#d54e53" :box 1))) t)
  '(magit-log-head-label-bisect-good ((t (:foreground "#b9ca4a" :box 1))) t)
- '(magit-log-head-label-bisect-skip ((t (:foreground "dark goldenrod" :box 1))))
+ '(magit-log-head-label-bisect-skip ((t (:foreground "dark goldenrod" :box 1))) t)
  '(magit-log-head-label-default ((t (:foreground "#e7c547" :box nil :weight bold))) t)
- '(magit-log-head-label-patches ((t (:foreground "IndianRed4" :box 1)))))
+ '(magit-log-head-label-patches ((t (:foreground "IndianRed4" :box 1))) t))
 
 (setq comint-scroll-show-maximum-output 1)
 ;; To use: checkout git repo into ~/.emacs.d/
