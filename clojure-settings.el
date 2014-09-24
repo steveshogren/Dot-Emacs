@@ -36,11 +36,15 @@
 (define-key clojure-mode-map (kbd "C--") 'cider-jump-back)
 (define-key clojure-mode-map (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
 
-
-;; (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-;; (add-hook 'cider-mode-hook 'ac-cider-setup)
-;; (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 (eval-after-load "auto-complete"
   '(add-to-list 'ac-modes 'cider-mode))
 
-(add-hook 'cider-mode-hook 'auto-complete-mode)
+;; (add-hook 'cider-mode-hook 'auto-complete-mode)
+
+;; (define-key clojure-mode-map (kbd "C-SPC") 'auto-complete)
+;;(define-key clojure-mode-map (kbd "C-e") 'auto-complete)
+
+
