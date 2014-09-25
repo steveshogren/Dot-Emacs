@@ -31,6 +31,8 @@
 (setq comint-scroll-show-maximum-output 1)
 ;; To use: checkout git repo into ~/.emacs.d/
 
+(set-frame-parameter nil 'fullscreen 'maximized)
+
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
 (add-to-list 'load-path "~/.emacs.d/color-theme-solarized/")
@@ -109,6 +111,9 @@
 
 (setq evil-default-cursor t)
 (set-cursor-color "#ffffff") 
+
+
+(delete-other-windows)
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
