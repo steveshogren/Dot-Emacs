@@ -33,6 +33,7 @@
 
 (set-frame-parameter nil 'fullscreen 'maximized)
 
+
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
 (add-to-list 'load-path "~/.emacs.d/color-theme-solarized/")
@@ -45,6 +46,21 @@
 (require 'evil)
 (evil-mode 1)
 
+(defun format-file ()
+  (interactive)
+  (mark-whole-buffer)
+  (indent-region (point-min) (point-max)))
+(global-set-key (kbd "<f6>") 'format-file)
+
+(defun indent-file (file)
+  "prompt for a file and indent it according to its major mode"
+  (interactive "fWhich file do you want to indent: ")
+  (find-file file)
+  ;; uncomment the next line to force the buffer into a c-mode
+  ;; (c-mode)
+  (indent-region (point-min) (point-max)))
+
+;; (global-set-key (kbd "C-x :") 'gsl-runner)
 
 (defun gsl-runner ()
   (interactive)
