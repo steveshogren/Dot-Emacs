@@ -30,6 +30,9 @@
 (define-key evil-insert-state-map (kbd "C-w k") 'evil-window-up)
 (define-key evil-insert-state-map (kbd "C-w h") 'evil-window-left)
 
+(define-key evil-normal-state-map (kbd ")") 'paredit-forward)
+(define-key evil-normal-state-map (kbd "(") 'paredit-backward)
+
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
