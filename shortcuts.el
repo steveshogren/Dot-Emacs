@@ -3,7 +3,8 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-(global-set-key (kbd "C-SPC") 'auto-complete)
+(global-set-key (kbd "C-SPC") 'company-complete)
+
 (global-set-key (kbd "C-c g") 'helm-git-grep)
 (global-set-key (kbd "C-*") 'helm-git-grep-at-point)
 
@@ -14,11 +15,6 @@
 (define-key global-map "\M-o" 'next-buffer)
 (define-key global-map "\M-u" 'previous-buffer)
 
-
-;; (global-set-key (kbd "C-x b") 'anything-mini)
-;;(global-set-key (kbd "C-x C-b") 'anything-mini)
-;;(global-set-key (kbd "C-x C-i") 'anything-imenu)
-;;(global-set-key (kbd "C-x i") 'anything-imenu)
 
 
 ;; Evil bindings
@@ -33,9 +29,6 @@
 (define-key evil-normal-state-map (kbd ")") 'paredit-forward)
 (define-key evil-normal-state-map (kbd "(") 'paredit-backward)
 
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 (global-set-key (kbd "M-q") 'switch-to-buffer)
 (global-set-key (kbd "M-r") 'paredit-reindent-defun)
@@ -47,9 +40,7 @@
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-S-o") 'next-buffer)
 (global-set-key (kbd "C-S-u") 'previous-buffer)
-(global-set-key (kbd "C-c b") 'anything-mini)
 (global-set-key (kbd "C-c e") 'eval-buffer)
-(global-set-key (kbd "C-r") 'undo)
 
 (global-set-key (kbd "C-x C-u") 'winner-undo)
 (global-set-key (kbd "C-x C-o") 'winner-redo)
@@ -64,6 +55,7 @@
 (global-set-key (kbd "<f3>") 'comment-or-uncomment-region)
 
 (global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-r") 'undo)
 
 
 

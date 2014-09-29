@@ -24,6 +24,10 @@
 (global-set-key (kbd "C-S-t") 'helm-ls-git-ls)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-and-recent)
 (global-set-key (kbd "C-x b") 'helm-buffers-and-recent)
+(global-set-key (kbd "C-c b") 'helm-buffers-and-recent)
+(global-set-key (kbd "C-c C-b") 'helm-buffers-and-recent)
 
 (global-set-key (kbd "C-S-f") 'helm-git-grep)
 
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
