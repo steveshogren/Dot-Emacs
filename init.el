@@ -21,12 +21,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview))))
  '(company-scrollbar-bg ((t (:background "#191919"))))
  '(company-scrollbar-fg ((t (:background "#0c0c0c"))))
  '(company-tooltip ((t (:inherit default :background "#050505"))))
  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
  '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(helm-ff-directory ((t (:foreground "#70c0b1"))))
+ '(helm-selection ((t (:box (:line-width 2 :color "forest green")))))
  '(magit-diff-add ((t (:foreground "green3"))) t)
  '(magit-diff-del ((t (:foreground "red3"))) t)
  '(magit-log-head-label-bisect-bad ((t (:foreground "#d54e53" :box 1))) t)
