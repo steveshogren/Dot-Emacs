@@ -134,6 +134,7 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
+
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
 
