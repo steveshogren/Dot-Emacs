@@ -134,6 +134,19 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
+(setq cider-known-endpoints '(("local" "127.0.0.1" "7888")))
+
+(defun cider-local ()
+  (interactive)
+  (cider-connect "127.0.0.1" "7888"))
+
+(global-set-key (kbd "<f7>") 'cider-local)
+
+(defun cider-remoter ()
+  (interactive)
+  ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
+  (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
+
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)
