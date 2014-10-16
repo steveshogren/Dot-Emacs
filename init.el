@@ -114,6 +114,7 @@
 (load "clojure-settings.el")
 (load "emacs-lisp-settings.el")
 (load "magit-settings.el")
+(load "waiter.el")
 
 (require 'anything-match-plugin)
 (require 'anything-config)
