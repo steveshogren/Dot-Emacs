@@ -57,6 +57,9 @@
 (setq evil-toggle-key "C-M-~")
 (require 'evil)
 (evil-mode 1)
+(require 'evil-paredit)
+
+(add-hook 'paredit-mode-hook 'evil-paredit-mode)
 
 (defun format-file ()
   (interactive)
