@@ -55,6 +55,8 @@
 (add-to-list 'load-path "~/.emacs.d/geiser/elisp/")
 (require 'geiser)
 (setq evil-toggle-key "C-M-~")
+(setq evil-symbol-word-search 1)
+
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
