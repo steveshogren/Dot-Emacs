@@ -34,6 +34,19 @@
 (add-hook 'cider-repl-mode-hook 'company-mode)
 (add-hook 'cider-mode-hook 'company-mode)
 
+(setq cider-known-endpoints '(("local" "127.0.0.1" "7888")))
+
+(defun cider-local ()
+  (interactive)
+  (cider-connect "127.0.0.1" "7888"))
+
+(global-set-key (kbd "<f7>") 'cider-local)
+
+(defun cider-remoter ()
+  (interactive)
+  ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
+  (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
+
 
 (custom-set-faces
  '(company-preview
