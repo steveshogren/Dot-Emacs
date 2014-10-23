@@ -81,7 +81,7 @@
 ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;; (when (< emacs-major-version 24) (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (add-to-list 'package-archives
-'("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 (package-initialize)
 
 (require 'rainbow-delimiters)
@@ -94,9 +94,9 @@
 
 (tabbar-mode)
 (defun my-tabbar-buffer-groups ()
-   (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+  (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
               ((eq major-mode 'dired-mode) "emacs")
-               (t "user"))))
+              (t "user"))))
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
 
@@ -106,7 +106,7 @@
 (load "desktopsaves.el")
 
 (when (not (package-installed-p 'helm))
-   (package-install 'helm))
+  (package-install 'helm))
 (require 'helm-config)
 (require 'helm-git-grep)
 (require 'helm-ls-git)
