@@ -60,6 +60,7 @@
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
+(define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
 
@@ -74,6 +75,7 @@
 (defun gsl-runner ()
   (interactive)
   (shell-command (concat "gsl " (buffer-file-name))))
+
 ;; (global-set-key (kbd "C-x :") 'gsl-runner)
 
 ;; Marmalade Package Manager
@@ -142,7 +144,7 @@
   (interactive) 
   (format-file))
 
-(add-hook 'evil-normal-state-entry-hook 'format-file)
+(add-hook 'evil-insert-state-exit-hook 'format-file)
 ;; (bound-and-true-p cider-mode)
 
 ;; C-h k (show keybinding def)
