@@ -47,6 +47,18 @@
   ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
   (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
 
+(defun clojure-setup ()
+  (delete-other-windows)
+  (split-window-right)
+  (evil-window-right)
+  (split-window-below)
+  )
+
+(when (get-buffer "*cider-error*")
+  (buffer-name)
+  (let ((filepath (buffer-file-name)))
+    (switch-to-buffer-other-window (get-buffer "*cider-error*"))
+    (switch-to-buffer-other-window (other-buffer (current-buffer) 1))))
 
 (custom-set-faces
  '(company-preview

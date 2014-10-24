@@ -1,11 +1,11 @@
 (when (not (package-installed-p 'haskell-mode))
-   (package-install 'haskell-mode))
+  (package-install 'haskell-mode))
 
 (defun string/ends-with (string suffix)
-      "Return t if STRING ends with SUFFIX."
-      (and (string-match (rx-to-string `(: ,suffix eos) t)
-                         string)
-           t))
+  "Return t if STRING ends with SUFFIX."
+  (and (string-match (rx-to-string `(: ,suffix eos) t)
+                     string)
+       t))
 
 (defun ensure-haskell-repl-running ()
   (when (not (get-buffer "*haskell*"))
