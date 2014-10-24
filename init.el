@@ -61,8 +61,11 @@
 (evil-mode 1)
 (require 'evil-paredit)
 (define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
+(setq evil-auto-indent 1)
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
+
+(setq cider-words-of-inspiration '("Kneel before Zod!"))
 
 (defun format-file ()
   (interactive)
