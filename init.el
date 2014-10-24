@@ -109,6 +109,10 @@
 (load "my-colors.el")
 (load "desktopsaves.el")
 
+(when (not (package-installed-p 'dash))
+  (package-install 'dash))
+(eval-after-load "dash" '(dash-enable-font-lock))
+
 (when (not (package-installed-p 'helm))
   (package-install 'helm))
 (require 'helm-config)
