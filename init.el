@@ -58,8 +58,11 @@
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
+(setq evil-auto-indent 1)
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
+
+(setq cider-words-of-inspiration '("Kneel before Zod!"))
 
 (defun format-file ()
   (interactive)
