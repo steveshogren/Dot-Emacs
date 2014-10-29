@@ -125,6 +125,8 @@
 (load "magit-settings.el")
 (load "waiter.el")
 
+(add-to-list 'auto-mode-alist '("\\Rakefile\\'" . ruby-mode))
+
 (require 'anything-match-plugin)
 (require 'anything-config)
 
