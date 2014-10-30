@@ -60,7 +60,6 @@
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
-(define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
 (setq evil-auto-indent 1)
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
@@ -151,7 +150,6 @@
   (interactive) 
   (format-file))
 
-(add-hook 'evil-insert-state-exit-hook 'format-file)
 ;; (bound-and-true-p cider-mode)
 
 ;; C-h k (show keybinding def)
