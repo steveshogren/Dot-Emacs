@@ -11,7 +11,7 @@
   (message "STOP"))
 (defun wait-looper (count)
   (second-wait 7)
-  (sleep-for 2)
+  (sleep-for 4)
   (if (= 10 count)
       nil
     (wait-looper (+ 1 count))))
