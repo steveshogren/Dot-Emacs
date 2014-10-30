@@ -44,11 +44,19 @@
 
 ;; color-theme-tomorrow // light higher contrast
 
-(if window-system
-    (if (functionp 'set-face-attribute) 
-        (set-face-attribute 'default nil
-                            :font "Inconsolata-11"
-                            )))
+(defun font-exists (font-name)
+  (find-font (font-spec :name font-name)))
+
+(defun set-font-if-exists (font-name)
+  (if (and window-system
+           (functionp 'set-face-attribute)
+           (font-exists font-name)) 
+      (set-face-attribute 'default nil
+                          :font font-name)))
+
+;; (set-font-if-exists "Inconsolata-14")
+(set-font-if-exists "SourceCodePro-12")
+
 (color-theme-sanityinc-tomorrow-bright)
 
 (setq visible-bell t)
