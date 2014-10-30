@@ -41,7 +41,7 @@
   (interactive)
   (condition-case ex
       (cider-connect "127.0.0.1" "7888")
-    ('error (cider-jack-in))))
+    ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
 
 (global-set-key (kbd "<f7>") 'cider-local)
 
