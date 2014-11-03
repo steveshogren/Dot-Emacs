@@ -19,6 +19,6 @@
   (interactive)
   (wait-looper 1)
   (message "----- DONE! -----"))
-;; (global-set-key (kbd "C-<f7>") 'start-wait)
+(global-set-key (kbd "C-<f9>") 'start-wait)
 
 
