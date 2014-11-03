@@ -152,6 +152,7 @@
 
 (global-git-gutter-mode 1)
 (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+(global-set-key (kbd "C-<f2>") 'git-gutter:popup-hunk)
 (add-hook 'git-gutter:update-hooks 'magit-revert-buffer-hook)
 
 (defun esc-cmd () 
