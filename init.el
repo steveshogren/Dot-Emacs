@@ -60,7 +60,6 @@
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
-(define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
 (setq evil-auto-indent 1)
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
@@ -111,6 +110,10 @@
 (load "my-colors.el")
 (load "desktopsaves.el")
 
+(when (not (package-installed-p 'dash))
+  (package-install 'dash))
+(eval-after-load "dash" '(dash-enable-font-lock))
+
 (when (not (package-installed-p 'helm))
   (package-install 'helm))
 (require 'helm-config)
@@ -154,8 +157,6 @@
 (defun esc-cmd () 
   (interactive) 
   (format-file))
-
-;; (add-hook 'evil-insert-state-exit-hook 'format-file)
 
 ;; (bound-and-true-p cider-mode)
 

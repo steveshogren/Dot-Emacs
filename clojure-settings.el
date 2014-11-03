@@ -50,18 +50,33 @@
   ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
   (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
 
-(defun clojure-setup ()
-  (delete-other-windows)
-  (split-window-right)
-  (evil-window-right)
-  (split-window-below)
-  )
 
-(when (get-buffer "*cider-error*")
-  (buffer-name)
-  (let ((filepath (buffer-file-name)))
-    (switch-to-buffer-other-window (get-buffer "*cider-error*"))
-    (switch-to-buffer-other-window (other-buffer (current-buffer) 1))))
+(defun clojure-window-default () 
+  (interactive)
+  (delete-other-windows)
+  (let ((repls (-filter (lambda (x) (string-match "*cider-repl*" x))
+                        (-map (lambda (x) (buffer-name x)) (buffer-list))))
+        (current (get-buffer (current-buffer))))
+    (when (= 1 (length repls))
+      (switch-to-buffer-other-window (get-buffer (car repls)))
+      (split-window-below)
+      (when (get-buffer "*cider-error*")
+        (evil-window-down 1)
+        (switch-to-buffer (get-buffer "*cider-error*")))
+      (switch-to-buffer-other-window current 1))))
+
+(define-key clojure-mode-map (kbd "C-<f7>") 'clojure-window-default)
+
+;; (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
+;; (global-set-key (kbd "RET") 'evil-ret)
+
+;; Only reformat on insert-state-exit for cider mode
+(add-hook 'cider-mode-hook 
+          (lambda () 
+            (add-hook 'evil-insert-state-exit-hook 'format-file nil 'make-it-local)))
+
+;; bind RET to ret-and-indent ONLY in cider mode!
+(evil-define-key 'insert cider-mode-map (kbd "RET") 'evil-ret-and-indent)
 
 (custom-set-faces
  '(company-preview
