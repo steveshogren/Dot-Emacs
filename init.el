@@ -67,6 +67,8 @@
 
 (setq cider-words-of-inspiration '("Kneel before Zod!"))
 
+
+
 (defun format-file ()
   (interactive)
   (save-excursion
@@ -145,11 +147,16 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
+(global-git-gutter-mode 1)
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+(add-hook 'git-gutter:update-hooks 'magit-revert-buffer-hook)
+
 (defun esc-cmd () 
   (interactive) 
   (format-file))
 
-(add-hook 'evil-insert-state-exit-hook 'format-file)
+;; (add-hook 'evil-insert-state-exit-hook 'format-file)
+
 ;; (bound-and-true-p cider-mode)
 
 ;; C-h k (show keybinding def)
