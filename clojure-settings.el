@@ -58,6 +58,7 @@
                         (-map (lambda (x) (buffer-name x)) (buffer-list))))
         (current (get-buffer (current-buffer))))
     (when (= 1 (length repls))
+      (split-window-right)
       (switch-to-buffer-other-window (get-buffer (car repls)))
       (split-window-below)
       (when (get-buffer "*cider-error*")
