@@ -1,6 +1,0 @@
-(when (not (package-installed-p 'git-gutter))
-   (package-install 'git-gutter))
-(global-git-gutter-mode t)
-(global-set-key (kbd "C-x v =") 'git-gutter:popup-diff)
-(global-set-key (kbd "C-x C-k") 'git-gutter:previous-diff)
-(global-set-key (kbd "C-x C-j") 'git-gutter:next-diff)

@@ -55,8 +55,30 @@
 (add-to-list 'load-path "~/.emacs.d/geiser/elisp/")
 (require 'geiser)
 (setq evil-toggle-key "C-M-~")
+(setq evil-symbol-word-search 1)
+
 (require 'evil)
 (evil-mode 1)
+(require 'evil-paredit)
+(setq evil-auto-indent 1)
+
+(add-hook 'paredit-mode-hook 'evil-paredit-mode)
+
+(setq cider-words-of-inspiration '("You realize that all your life you have been coasting along as if you were in a dream. Suddenly, facing the trials of the last few days, you have come alive."
+                                    "You realize that you are catching on to the secret of success. It's just a matter of concentration."
+                                    "It's all suddenly obvious to you. You just have to concentrate. All the energy and time you've wasted -- it's a sin. But without the experience you've gained, taking risks, taking responsibility for failure, how could you have understood?"
+                                    "Everything you do is just a bit easier, more instinctive, more satisfying. It is as though you had suddenly developed keen senses and instincts."
+                                    "You sense yourself more aware, more open to new ideas. You've learned a lot about Morrowind. It's hard to believe how ignorant you were -- but now you have so much more to learn."
+                                    "You resolve to continue pushing yourself. Perhaps there's more to you than you thought."
+                                    "The secret does seem to be hard work, yes, but it's also a kind of blind passion, an inspiration."
+                                    "Everything you do is just a bit easier, more instinctive, more satisfying. It is as though you had suddenly developed keen senses and instincts."
+                                    "You woke today with a new sense of purpose. You're no longer afraid of failure. Failure is just an opportunity to learn something new."
+                                    "Being smart doesn't hurt. And a little luck now and then is nice. But the key is patience and hard work. And when it pays off, it's SWEET!"
+                                    "You can't believe how easy it is. You just have to go -- a little crazy. And then, suddenly, it all makes sense, and everything you do turns to gold."
+                                    "It's the most amazing thing. Yesterday it was hard, and today it is easy. Just a good night's sleep, and yesterday's mysteries are today's masteries."
+                                    "Today you wake up, full of energy and ideas, and you know, somehow, that overnight everything has changed. What a difference a day makes."))
+
+
 
 (defun format-file ()
   (interactive)
@@ -69,6 +91,7 @@
 (defun gsl-runner ()
   (interactive)
   (shell-command (concat "gsl " (buffer-file-name))))
+
 ;; (global-set-key (kbd "C-x :") 'gsl-runner)
 
 ;; Marmalade Package Manager
@@ -76,7 +99,7 @@
 ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;; (when (< emacs-major-version 24) (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (add-to-list 'package-archives
-'("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 (package-initialize)
 
 (require 'rainbow-delimiters)
@@ -89,19 +112,22 @@
 
 (tabbar-mode)
 (defun my-tabbar-buffer-groups ()
-   (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+  (list (cond ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
               ((eq major-mode 'dired-mode) "emacs")
-               (t "user"))))
+              (t "user"))))
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
-
 
 (load "enable-paredit.el")
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
 
+(when (not (package-installed-p 'dash))
+  (package-install 'dash))
+(eval-after-load "dash" '(dash-enable-font-lock))
+
 (when (not (package-installed-p 'helm))
-   (package-install 'helm))
+  (package-install 'helm))
 (require 'helm-config)
 (require 'helm-git-grep)
 (require 'helm-ls-git)
@@ -114,6 +140,9 @@
 (load "clojure-settings.el")
 (load "emacs-lisp-settings.el")
 (load "magit-settings.el")
+(load "waiter.el")
+
+(add-to-list 'auto-mode-alist '("\\Rakefile\\'" . ruby-mode))
 
 (require 'anything-match-plugin)
 (require 'anything-config)
@@ -129,24 +158,20 @@
 (setq evil-default-cursor t)
 (set-cursor-color "#ffffff") 
 
-
 (delete-other-windows)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-(setq cider-known-endpoints '(("local" "127.0.0.1" "7888")))
+(global-git-gutter-mode 1)
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+(global-set-key (kbd "C-<f2>") 'git-gutter:popup-hunk)
+(add-hook 'git-gutter:update-hooks 'magit-revert-buffer-hook)
 
-(defun cider-local ()
-  (interactive)
-  (cider-connect "127.0.0.1" "7888"))
+(defun esc-cmd () 
+  (interactive) 
+  (format-file))
 
-(global-set-key (kbd "<f7>") 'cider-local)
-
-(defun cider-remoter ()
-  (interactive)
-  ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
-  (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
-
+;; (bound-and-true-p cider-mode)
 
 ;; C-h k (show keybinding def)
 ;; C-M-x - eval form at point (in elisp, nrepl, and geiser)

@@ -27,6 +27,7 @@
 
 (define-key clojure-mode-map (kbd "C-q") 'cider-jump)
 (define-key clojure-mode-map (kbd "<f12>") 'cider-jump)
+(define-key clojure-mode-map (kbd "<f8>") 'cider-eval-buffer)
 (define-key clojure-mode-map (kbd "C-M-h") 'cider-jump-back)
 (define-key clojure-mode-map (kbd "C--") 'cider-jump-back)
 (define-key clojure-mode-map (kbd "C-S-M-x") 'cider-eval-print-last-sexp)
@@ -34,6 +35,48 @@
 (add-hook 'cider-repl-mode-hook 'company-mode)
 (add-hook 'cider-mode-hook 'company-mode)
 
+(setq cider-known-endpoints '(("local" "127.0.0.1" "7888")))
+
+(defun cider-local ()
+  (interactive)
+  (condition-case ex
+      (cider-connect "127.0.0.1" "7888")
+    ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
+
+(global-set-key (kbd "<f7>") 'cider-local)
+
+(defun cider-remoter ()
+  (interactive)
+  ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
+  (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
+
+
+(defun clojure-window-default () 
+  (interactive)
+  (delete-other-windows)
+  (let ((repls (-filter (lambda (x) (string-match "*cider-repl*" x))
+                        (-map (lambda (x) (buffer-name x)) (buffer-list))))
+        (current (get-buffer (current-buffer))))
+    (when (= 1 (length repls))
+      (switch-to-buffer-other-window (get-buffer (car repls)))
+      (split-window-below)
+      (when (get-buffer "*cider-error*")
+        (evil-window-down 1)
+        (switch-to-buffer (get-buffer "*cider-error*")))
+      (switch-to-buffer-other-window current 1))))
+
+(define-key clojure-mode-map (kbd "C-<f7>") 'clojure-window-default)
+
+;; (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
+;; (global-set-key (kbd "RET") 'evil-ret)
+
+;; Only reformat on insert-state-exit for cider mode
+(add-hook 'cider-mode-hook 
+          (lambda () 
+            (add-hook 'evil-insert-state-exit-hook 'format-file nil 'make-it-local)))
+
+;; bind RET to ret-and-indent ONLY in cider mode!
+(evil-define-key 'insert cider-mode-map (kbd "RET") 'evil-ret-and-indent)
 
 (custom-set-faces
  '(company-preview
