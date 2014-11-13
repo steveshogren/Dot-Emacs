@@ -27,7 +27,18 @@
 (global-set-key (kbd "C-c b") 'helm-buffers-and-recent)
 (global-set-key (kbd "C-c C-b") 'helm-buffers-and-recent)
 
-(global-set-key (kbd "C-S-f") 'helm-git-grep)
+;; (global-set-key (kbd "C-S-f") 'helm-git-grep)
 
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
+
+(add-to-list 'grep-find-ignored-directories "node_modules")
+(add-to-list 'grep-find-ignored-directories ".git")
+
+(defun helm-do-grep-recursive (&optional non-recursive)
+  "Like `helm-do-grep', but greps recursively by default."
+  (interactive "P")
+  (let* ((current-prefix-arg (not non-recursive))
+         (helm-current-prefix-arg non-recursive))
+    (call-interactively 'helm-do-grep)))
+(global-set-key (kbd "C-S-f") 'helm-do-grep-recursive)
