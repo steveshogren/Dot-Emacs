@@ -6,6 +6,7 @@
  '(ac-auto-show-menu 0.3)
  '(ac-modes nil)
  '(ac-quick-help-delay 0.5)
+ '(desktop-save-mode 1)
  '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector ["#534636" "#cb6077" "#beb55b" "#f4bc87" "#8ab3b5" "#a89bb9" "#8ab3b5" "#e9e1dd"])
  '(ansi-term-color-vector [unspecified "#534636" "#cb6077" "#beb55b" "#f4bc87" "#8ab3b5" "#a89bb9" "#8ab3b5" "#e9e1dd"])
@@ -44,7 +45,6 @@
 (setq comint-scroll-show-maximum-output 1)
 (setq comint-scroll-to-bottom-on-output 1)
 (set-frame-parameter nil 'fullscreen 'maximized)
-
 
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/color-theme/")

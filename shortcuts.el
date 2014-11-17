@@ -4,6 +4,9 @@
 (ido-mode 1)
 
 (global-set-key (kbd "C-SPC") 'company-complete)
+;; Trying to get C-n/p use company not evil autocomplete 
+;; (global-set-key (kbd "C-n") 'company-select-next)
+;; (global-set-key (kbd "C-p") 'company-select-previous)
 
 (global-set-key (kbd "C-c g") 'helm-git-grep)
 (global-set-key (kbd "C-*") 'helm-git-grep-at-point)
