@@ -6,6 +6,7 @@
  '(ac-auto-show-menu 0.3)
  '(ac-modes nil)
  '(ac-quick-help-delay 0.5)
+ '(desktop-save-mode 1)
  '(ansi-color-faces-vector [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector ["#534636" "#cb6077" "#beb55b" "#f4bc87" "#8ab3b5" "#a89bb9" "#8ab3b5" "#e9e1dd"])
  '(ansi-term-color-vector [unspecified "#534636" "#cb6077" "#beb55b" "#f4bc87" "#8ab3b5" "#a89bb9" "#8ab3b5" "#e9e1dd"])
@@ -45,7 +46,6 @@
 (setq comint-scroll-to-bottom-on-output 1)
 (set-frame-parameter nil 'fullscreen 'maximized)
 
-
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
 (add-to-list 'load-path "~/.emacs.d/color-theme-solarized/")
@@ -64,7 +64,19 @@
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
 
-(setq cider-words-of-inspiration '("Kneel before Zod!"))
+(setq cider-words-of-inspiration '("You realize that all your life you have been coasting along as if you were in a dream. Suddenly, facing the trials of the last few days, you have come alive."
+                                    "You realize that you are catching on to the secret of success. It's just a matter of concentration."
+                                    "It's all suddenly obvious to you. You just have to concentrate. All the energy and time you've wasted -- it's a sin. But without the experience you've gained, taking risks, taking responsibility for failure, how could you have understood?"
+                                    "Everything you do is just a bit easier, more instinctive, more satisfying. It is as though you had suddenly developed keen senses and instincts."
+                                    "You sense yourself more aware, more open to new ideas. You've learned a lot about Morrowind. It's hard to believe how ignorant you were -- but now you have so much more to learn."
+                                    "You resolve to continue pushing yourself. Perhaps there's more to you than you thought."
+                                    "The secret does seem to be hard work, yes, but it's also a kind of blind passion, an inspiration."
+                                    "Everything you do is just a bit easier, more instinctive, more satisfying. It is as though you had suddenly developed keen senses and instincts."
+                                    "You woke today with a new sense of purpose. You're no longer afraid of failure. Failure is just an opportunity to learn something new."
+                                    "Being smart doesn't hurt. And a little luck now and then is nice. But the key is patience and hard work. And when it pays off, it's SWEET!"
+                                    "You can't believe how easy it is. You just have to go -- a little crazy. And then, suddenly, it all makes sense, and everything you do turns to gold."
+                                    "It's the most amazing thing. Yesterday it was hard, and today it is easy. Just a good night's sleep, and yesterday's mysteries are today's masteries."
+                                    "Today you wake up, full of energy and ideas, and you know, somehow, that overnight everything has changed. What a difference a day makes."))
 
 
 

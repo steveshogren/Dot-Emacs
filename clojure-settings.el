@@ -10,7 +10,7 @@
 (unless (package-installed-p 'cider)
   (package-install 'cider))
 
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+;; (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-auto-select-error-buffer nil)
