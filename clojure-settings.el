@@ -10,7 +10,7 @@
 (unless (package-installed-p 'cider)
   (package-install 'cider))
 
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+;; (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-auto-select-error-buffer nil)
@@ -58,6 +58,7 @@
                         (-map (lambda (x) (buffer-name x)) (buffer-list))))
         (current (get-buffer (current-buffer))))
     (when (= 1 (length repls))
+      (split-window-right)
       (switch-to-buffer-other-window (get-buffer (car repls)))
       (split-window-below)
       (when (get-buffer "*cider-error*")
