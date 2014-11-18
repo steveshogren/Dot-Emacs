@@ -57,6 +57,11 @@
 (setq evil-toggle-key "C-M-~")
 (setq evil-symbol-word-search 1)
 
+(setq scroll-margin 1
+      scroll-conservatively 0
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
