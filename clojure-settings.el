@@ -42,8 +42,14 @@
   (condition-case ex
       (cider-connect "127.0.0.1" "7888")
     ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
+(defun cider-local-admin ()
+  (interactive)
+  (condition-case ex
+      (cider-connect "127.0.0.1" "7888")
+    ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
 
 (global-set-key (kbd "<f7>") 'cider-local)
+(global-set-key (kbd "<f5>") 'cider-local-admin)
 
 (defun cider-remoter ()
   (interactive)
