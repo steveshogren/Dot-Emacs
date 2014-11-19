@@ -57,10 +57,6 @@
 (setq evil-toggle-key "C-M-~")
 (setq evil-symbol-word-search 1)
 
-(setq scroll-margin 1
-      scroll-conservatively 0
-      scroll-up-aggressively 0.01
-      scroll-down-aggressively 0.01)
 
 (require 'evil)
 (evil-mode 1)
@@ -68,6 +64,17 @@
 (setq evil-auto-indent 1)
 
 (add-hook 'paredit-mode-hook 'evil-paredit-mode)
+
+(setq scroll-margin 1
+  ;;    scroll-step 1
+      scroll-conservatively 0
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+
+(setq-default scroll-up-aggressively 0.01
+              scroll-down-aggressively 0.01)
+(setq auto-window-vscroll nil)
+;; (setq redisplay-dont-pause t)
 
 (setq cider-words-of-inspiration '("You realize that all your life you have been coasting along as if you were in a dream. Suddenly, facing the trials of the last few days, you have come alive."
                                     "You realize that you are catching on to the secret of success. It's just a matter of concentration."
