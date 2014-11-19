@@ -1,4 +1,6 @@
 (require 'clojure-mode)
+(require 'cider)
+
 (defun turn-on-paredit ()
   (rainbow-delimiters-mode 1)
   (paredit-mode 1))
@@ -10,7 +12,7 @@
 (unless (package-installed-p 'cider)
   (package-install 'cider))
 
-;; (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 (setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-auto-select-error-buffer nil)
@@ -45,7 +47,7 @@
 (defun cider-local-admin ()
   (interactive)
   (condition-case ex
-      (cider-connect "127.0.0.1" "7888")
+      (cider-connect "127.0.0.1" "7889")
     ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
 
 (global-set-key (kbd "<f7>") 'cider-local)
