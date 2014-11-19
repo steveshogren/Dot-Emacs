@@ -21,3 +21,4 @@ helm-c-adaptive-history
 *#
 *.dat
 
+/steves.el

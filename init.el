@@ -152,7 +152,10 @@
 (load "clojure-settings.el")
 (load "emacs-lisp-settings.el")
 (load "magit-settings.el")
-(load "waiter.el")
+
+
+(if (file-exists-p "steves.el")
+    (load "waiter.el"))
 
 (add-to-list 'auto-mode-alist '("\\Rakefile\\'" . ruby-mode))
 

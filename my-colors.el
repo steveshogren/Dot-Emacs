@@ -54,8 +54,9 @@
       (set-face-attribute 'default nil
                           :font font-name)))
 
-;; (set-font-if-exists "Inconsolata-14")
-(set-font-if-exists "SourceCodePro-12")
+(if (file-exists-p "steves.el")
+    (set-font-if-exists "Inconsolata-11")
+  (set-font-if-exists "SourceCodePro-12"))
 
 (color-theme-sanityinc-tomorrow-bright)
 
