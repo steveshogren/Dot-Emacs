@@ -2,6 +2,7 @@ places
 url/
 session*
 *elc
+*lock
 .DS_Store
 starter-kit-2.*
 *.tar
@@ -22,3 +23,6 @@ helm-c-adaptive-history
 *.dat
 
 /steves.el
+/.emacs.desktop
+/eshell/history
+/eshell/lastdir
