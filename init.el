@@ -44,6 +44,12 @@
 
 ;; To use: checkout git repo into ~/.emacs.d/
 
+
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
 (setq comint-scroll-show-maximum-output 1)
 (setq comint-scroll-to-bottom-on-output 1)
 (set-frame-parameter nil 'fullscreen 'maximized)
