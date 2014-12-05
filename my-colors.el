@@ -1,3 +1,4 @@
+
 (unless (package-installed-p 'color-theme-sanityinc-tomorrow)
   (package-install 'color-theme-sanityinc-tomorrow))
 
@@ -67,4 +68,40 @@
 
 
 (font-lock-add-keywords 'clojure-mode
-  '(("\\<\\(and\\|or\\|not\\)\\>" . font-lock-keyword-face)))
+                        '(("\\<\\(and\\|or\\|not\\)\\>" . font-lock-keyword-face)))
+
+(defun my-buffer-face-mode-variable (color)
+  "Set font to a variable width (proportional) fonts in current buffer"
+  (interactive)
+  (setq buffer-face-mode-face (list :background color))
+  (buffer-face-mode 1))
+
+(defun my-set-theme-on-mode ()
+  "set background color depending on file suffix"
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (cond
+     ((string-match "halcyon" file-name) (my-buffer-face-mode-variable "#00001A"))
+     ;; ((string-match "nimbus" file-name) (my-buffer-face-mode-variable "black"))
+     ((string-match ".emacs" file-name) (my-buffer-face-mode-variable "#00001A"))
+     ;; ((string-match "overseer" file-name) (my-buffer-face-mode-variable "black"))
+     (t ""))))
+
+
+
+(defun disable-all-buffer-face-mode ()
+  (interactive)
+  (let ((current (get-buffer (current-buffer))))
+    (-map (lambda (x) (progn (switch-to-buffer x)
+                             (buffer-face-mode 0))) (buffer-list))
+    (switch-to-buffer current 1)))
+
+(add-hook 'helm-after-action-hook 'my-set-theme-on-mode)
+(add-hook 'kill-emacs-hook 'disable-all-buffer-face-mode)
+
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+
