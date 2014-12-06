@@ -82,8 +82,9 @@
   (let ((file-name (buffer-file-name)))
     (cond
      ((string-match "halcyon" file-name) (my-buffer-face-mode-variable "#00001A"))
+     ;; ((string-match "dwarf" file-name) (my-buffer-face-mode-variable "#001A1A"))
      ;; ((string-match "nimbus" file-name) (my-buffer-face-mode-variable "black"))
-     ((string-match ".emacs" file-name) (my-buffer-face-mode-variable "#00001A"))
+     ;; ((string-match ".emacs" file-name) (my-buffer-face-mode-variable "#00001A"))
      ;; ((string-match "overseer" file-name) (my-buffer-face-mode-variable "black"))
      (t ""))))
 
@@ -97,6 +98,7 @@
     (switch-to-buffer current 1)))
 
 (add-hook 'helm-after-action-hook 'my-set-theme-on-mode)
+(add-hook 'find-file-hook 'my-set-theme-on-mode)
 (add-hook 'kill-emacs-hook 'disable-all-buffer-face-mode)
 
 (setq frame-title-format
