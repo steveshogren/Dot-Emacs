@@ -21,7 +21,7 @@
 ;; USE FOR DEFAULTING TO 7888
 ;; (setq cider-known-endpoints '(("host-a" "127.0.0.1" "7888")))
 
-(setq cider-stacktrace-default-filters '(tooling dup))
+;;(setq cider-stacktrace-default-filters '(tooling dup))
 
 (setq cider-repl-use-clojure-font-lock t)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
