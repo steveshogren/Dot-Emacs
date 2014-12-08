@@ -147,6 +147,7 @@
 (require 'helm-ls-git)
 
 (load "helm-settings.el")
+(load "markdown-settings.el")
 
 (load "js-settings.el")
 (load "haskell-settings.el")
