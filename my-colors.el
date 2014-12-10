@@ -81,6 +81,8 @@
   (interactive)
   (let ((file-name (buffer-file-name)))
     (cond
+     ((and (string-match "halcyon" file-name)
+           (string-match "public" file-name)) (my-buffer-face-mode-variable "#1A0000"))
      ((string-match "halcyon" file-name) (my-buffer-face-mode-variable "#00001A"))
      ;; ((string-match "dwarf" file-name) (my-buffer-face-mode-variable "#001A1A"))
      ;; ((string-match "nimbus" file-name) (my-buffer-face-mode-variable "black"))

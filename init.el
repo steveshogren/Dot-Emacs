@@ -224,3 +224,4 @@
 ;; HTML-mode
 ;; close html tag -  C-c / 
 ;; delete html tags -  C-c C-d 
+(put 'downcase-region 'disabled nil)
