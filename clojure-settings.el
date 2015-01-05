@@ -39,16 +39,16 @@
 
 (setq cider-known-endpoints '(("local" "127.0.0.1" "7888")))
 
-(defun cider-local ()
+(defun better-cider-connect (port)
   (interactive)
+  (if (y-or-n-p "Close all old cider buffers?")
+      (bk-kill-buffers "cider"))
   (condition-case ex
-      (cider-connect "127.0.0.1" "7888")
-    ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
-(defun cider-local-admin ()
-  (interactive)
-  (condition-case ex
-      (cider-connect "127.0.0.1" "7889")
-    ('error (if (y-or-n-p "No local repl, jack in? y/n") (cider-jack-in)))))
+      (cider-connect "127.0.0.1" port)
+    ('error (if (y-or-n-p "No local repl, jack in?")
+                (cider-jack-in)))))
+(defun cider-local () (interactive) (better-cider-connect "7888"))
+(defun cider-local-admin () (interactive) (better-cider-connect "7889"))
 
 (global-set-key (kbd "<f7>") 'cider-local)
 (global-set-key (kbd "<f5>") 'cider-local-admin)

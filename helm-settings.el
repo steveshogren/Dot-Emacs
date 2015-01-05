@@ -42,3 +42,13 @@
          (helm-current-prefix-arg non-recursive))
     (call-interactively 'helm-do-grep)))
 (global-set-key (kbd "C-S-f") 'helm-do-grep-recursive)
+
+(defun helm-project-search (exts)
+  (interactive "sSearch extensions separated by spaces (default: clj json js html css): ")
+  (helm-do-grep-1 (list (helm-git-grep-get-top-dir))
+                  1
+                  nil
+                  (or (-map (lambda (x) (concat "*." x))
+                            (split-string exts))
+                      '("*.clj" "*.json" "*.js" "*.html" "*.css"))))
+(global-set-key (kbd "C-S-M-f") 'helm-project-search)

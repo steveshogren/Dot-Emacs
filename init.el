@@ -132,6 +132,7 @@
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
 (load "enable-paredit.el")
+(load "kill-buffers.el")
 (load "increment-number.el")
 (load "my-colors.el")
 (load "desktopsaves.el")
