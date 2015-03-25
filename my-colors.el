@@ -38,7 +38,7 @@
 ;; color-theme-id-dark
 ;; color-theme-xemacs // light white blue
 ;; color-theme-jsc-light2 // light no contrast
-;; color-theme-tomorrow // light higher contrast
+;; (color-theme-tomorrow) // light higher contrast
 ;; (color-theme-comidia) ;; dark orange/blue
 ;; (color-theme-pok-wob) ;; dark yellow/white
 
@@ -58,6 +58,11 @@
 (if (file-exists-p "steves.el")
     (set-font-if-exists "Inconsolata-11")
   (set-font-if-exists "SourceCodePro-12"))
+
+(defun meetup-theme ()
+  (set-font-if-exists "Inconsolata-21")
+  (color-theme-pok-wob)
+  )
 
 (color-theme-sanityinc-tomorrow-bright)
 

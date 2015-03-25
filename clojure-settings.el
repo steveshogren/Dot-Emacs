@@ -21,7 +21,7 @@
 ;; USE FOR DEFAULTING TO 7888
 ;; (setq cider-known-endpoints '(("host-a" "127.0.0.1" "7888")))
 
-;;(setq cider-stacktrace-default-filters '(tooling dup))
+;; (setq cider-stacktrace-default-filters '(tooling dup))
 
 (setq cider-repl-use-clojure-font-lock t)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
@@ -58,6 +58,26 @@
   ;; (run-lisp "lein repl :connect http://127.0.0.1:8080/repl")
   (run-lisp "lein repl :connect http://nimbus-admin.stage1.mybluemix.net:80/repl"))
 
+(defun clojure-add-trace () 
+  (interactive)
+  (paredit-wrap-sexp)
+  (insert "trace/trace \"\"")
+  (backward-char)
+  (evil-insert 1)
+  (format-file))
+
+(defun clojure-remove-trace () 
+  (interactive)
+  (search-backward "trace")
+  (paredit-forward-barf-sexp)
+  (paredit-backward)
+  (paredit-backward)
+  (kill-sexp)
+  (format-file))
+
+(define-key clojure-mode-map (kbd "C-<f9>") 'clojure-add-trace)
+(define-key clojure-mode-map (kbd "C-<f10>") 'clojure-remove-trace)
+
 
 (defun clojure-window-default () 
   (interactive)
@@ -75,6 +95,7 @@
       (switch-to-buffer-other-window current 1))))
 
 (define-key clojure-mode-map (kbd "C-<f7>") 'clojure-window-default)
+(define-key clojure-mode-map (kbd "C-`") 'cider-test-run-test)
 
 ;; (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
 ;; (global-set-key (kbd "RET") 'evil-ret)

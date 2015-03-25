@@ -59,7 +59,6 @@
 (setq evil-toggle-key "C-M-~")
 (setq evil-symbol-word-search 1)
 
-
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
@@ -92,7 +91,25 @@
                                    "It's the most amazing thing. Yesterday it was hard, and today it is easy. Just a good night's sleep, and yesterday's mysteries are today's masteries."
                                    "Today you wake up, full of energy and ideas, and you know, somehow, that overnight everything has changed. What a difference a day makes."))
 
+;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
+(defun put-file-name ()
+  (interactive)
+  (insert (buffer-file-name)))
 
+(defun rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file name new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
 
 (defun format-file ()
   (interactive)
