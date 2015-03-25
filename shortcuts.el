@@ -3,6 +3,8 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(global-set-key (kbd "<delete>") nil)
+
 (global-set-key (kbd "C-SPC") 'company-complete)
 ;; Trying to get C-n/p use company not evil autocomplete 
 ;; (global-set-key (kbd "C-n") 'company-select-next)
@@ -24,6 +26,7 @@
 (define-key evil-insert-state-map (kbd "C-w") nil)
 (define-prefix-command 'window-move-map)
 (define-key evil-insert-state-map (kbd "C-w") window-move-map)
+(define-key evil-insert-state-map (kbd "<delete>") 'paredit-forward-delete)
 (define-key evil-insert-state-map (kbd "C-w l") 'evil-window-right)
 (define-key evil-insert-state-map (kbd "C-w j") 'evil-window-down)
 (define-key evil-insert-state-map (kbd "C-w k") 'evil-window-up)
