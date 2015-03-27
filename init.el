@@ -131,7 +131,18 @@
 ;; (when (< emacs-major-version 24) (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (add-to-list 'package-archives
              '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+;; (unless package-archive-contents (package-refresh-contents))
+;; (package-refresh-contents)
 (package-initialize)
+
+;; fsharp-mode needs just regular melpa:
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+;; (package-refresh-contents)
+(unless (package-installed-p 'fsharp-mode)
+  (package-install 'fsharp-mode))
+
+(require 'fsharp-mode)
 
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
