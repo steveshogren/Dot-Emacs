@@ -59,6 +59,20 @@
 (setq evil-toggle-key "C-M-~")
 (setq evil-symbol-word-search 1)
 
+(setq sql-postgres-login-params
+      '((user :default "postgres")
+        (database :default "swipes")
+        (server :default "localhost")))
+
+;; comint mode settings
+(evil-define-key 'normal comint-mode-map (kbd "C-p") 'comint-previous-input)
+(evil-define-key 'normal comint-mode-map (kbd "C-n") 'comint-next-input)
+(evil-define-key 'insert comint-mode-map (kbd "C-p") 'comint-previous-input)
+(evil-define-key 'insert comint-mode-map (kbd "C-n") 'comint-next-input)
+(global-set-key [f1] 'shell)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+
 (require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
@@ -256,4 +270,14 @@
 ;; HTML-mode
 ;; close html tag -  C-c / 
 ;; delete html tags -  C-c C-d 
+
+;; search -replace across files
+;; Open the directory that contains all the files web need to find and replace in dired mode.
+;; t (dired-toggle-marks) to select all files in the current folder
+;; Type Q (dired-do-query-replace-regexp), type in the pattern that you want Emacs to find and the replace string. Hit RET.
+;; ! to replace all occurrences - N to skip all
+;; Y all files without asking
+;; Call ibuffer to list all opened files.
+;; * u to mark all unsaved files - S to save all marked files, type D to close them all.
+
 (put 'downcase-region 'disabled nil)
