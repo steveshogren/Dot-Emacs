@@ -64,16 +64,24 @@
         (database :default "swipes")
         (server :default "localhost")))
 
+
+
+(global-set-key [f1] 'shell)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+(defun create-shell ()
+    "creates a shell with a given name"
+    (interactive);; "Prompt\n shell name:")
+    (let ((shell-name (read-string "shell name: " nil)))
+    (shell (concat "*" shell-name "*"))))
+
+(require 'evil)
+
 ;; comint mode settings
 (evil-define-key 'normal comint-mode-map (kbd "C-p") 'comint-previous-input)
 (evil-define-key 'normal comint-mode-map (kbd "C-n") 'comint-next-input)
 (evil-define-key 'insert comint-mode-map (kbd "C-p") 'comint-previous-input)
 (evil-define-key 'insert comint-mode-map (kbd "C-n") 'comint-next-input)
-(global-set-key [f1] 'shell)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-
-(require 'evil)
 (evil-mode 1)
 (require 'evil-paredit)
 (setq evil-auto-indent 1)
@@ -132,6 +140,9 @@
     (indent-region (point-min) (point-max))))
 (global-set-key (kbd "<f6>") 'format-file)
 
+(defun node-repl () (interactive)
+  (pop-to-buffer (make-comint "node-repl" "nodejs" nil "--interactive")))
+;; (node-repl)
 
 (defun gsl-runner ()
   (interactive)

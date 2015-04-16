@@ -13,6 +13,8 @@
 (global-set-key (kbd "C-c g") 'helm-git-grep)
 (global-set-key (kbd "C-*") 'helm-git-grep-at-point)
 
+(define-key helm-grep-mode-map (kbd "C-M-o") 'helm-grep-mode-jump-other-window)
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
@@ -20,6 +22,12 @@
 (define-key global-map "\M-o" 'next-buffer)
 (define-key global-map "\M-u" 'previous-buffer)
 
+(defun my-html-mode-hook ()
+  (define-key html-mode-map (kbd "C-%") 'sgml-skip-tag-forward)
+  (define-key html-mode-map (kbd "C-$") 'sgml-skip-tag-backward)
+  )
+
+(add-hook 'html-mode-hook 'my-html-mode-hook)
 
 
 ;; Evil bindings

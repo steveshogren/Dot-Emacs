@@ -56,7 +56,7 @@
                           :font font-name)))
 
 (if (file-exists-p "steves.el")
-    (set-font-if-exists "Inconsolata-11")
+    (set-font-if-exists "Inconsolata-13")
   (set-font-if-exists "SourceCodePro-12"))
 
 (defun meetup-theme ()
